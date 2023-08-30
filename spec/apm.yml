@@ -800,6 +800,8 @@ paths:
           description: ''
           content:
             application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
               example:
                   id: def07900-a5cb-47d2-a928-2b16d6510972
                   name: X12-v005010-850
@@ -2613,7 +2615,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/b2bEntity'
         - properties:
-            id?:
+            id:
               type: string
             identifierTypeQualifierId:
               type: string
@@ -2632,6 +2634,13 @@ components:
             value:
               type: string
           type: object
+          required:
+            - identifierTypeQualifierId
+            - status
+            - qualifierLabel
+            - typeLabel
+            - code
+            - value
     identifierType:
       title: IdentifierType
       description: Identifier Types
@@ -2713,10 +2722,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/partner'
         - properties:
-            logo?:
+            logo:
               $ref: '#/components/schemas/logo'
               nullable: true
-            contacts?:
+            contacts:
               type: array
               items:
                 $ref: '#/components/schemas/contact'
@@ -2724,7 +2733,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/identifier'
-            addresses?:
+            addresses:
               type: array
               items:
                 $ref: '#/components/schemas/address'
@@ -2749,6 +2758,15 @@ components:
             usedInDeployments:
               $ref: '#/components/schemas/UsedInDeployments'
           type: object
+          required:
+            - identifiers
+            - created_at
+            - created_by
+            - updated_at
+            - updated_by
+            - protocols
+            - standars
+            - usedInDeployments
     UsedInDeployments:
       title: UsedInDeployments
       description: Type of usedInDeployments
@@ -3309,9 +3327,9 @@ components:
           type: string
         endpointTypeId:
           type: string
-        partner?:
+        partner:
           $ref: '#/components/schemas/partner'
-        partnerId?:
+        partnerId:
           type: string
         deployment:
           $ref: '#/components/schemas/EndpointDeployment'
@@ -3490,12 +3508,12 @@ components:
           type: string
         partnerFromId:
           type: string
-        preProcessingEndpoint?:
+        preProcessingEndpoint:
           $ref: '#/components/schemas/baseEndpoint'
           nullable: true
         receivingEndpoint:
           $ref: '#/components/schemas/baseEndpoint'
-        receivingAckEndpoint?:
+        receivingAckEndpoint:
           $ref: '#/components/schemas/baseEndpoint'
           nullable: true
         targetEndpoint:
@@ -3525,6 +3543,32 @@ components:
         - sourceDocType
         - targetDocType
         - documentMapping
+    Document:
+      title: Document or Message Type
+      type: object
+      discriminator:
+        propertyName: document
+      properties:
+        id:
+          type: string
+        documentFlowDirection:
+          type: string
+          enum: [INBOUND, OUTBOUND]
+        documentTypeRole:
+          type: string
+          enum: [SEND, RECEIVE]
+        ediDocumentTypeId:
+          type: string
+        isStandard:
+          type: boolean
+        name:
+          type: string
+        messageDataScript:
+          type: string
+        documentTypeParameters:
+          type: string
+        dwFile:
+          type: object
   responses:
     trait_isPageable_200:
       description: ''
