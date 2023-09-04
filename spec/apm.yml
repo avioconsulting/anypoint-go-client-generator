@@ -43,6 +43,55 @@ paths:
                     description: Other Contact
         '404':
           description: 'Not found'
+  /organizations/{organizationId}/environments/{environmentId}/partnerprofiles:
+    parameters:
+      - $ref: '#/components/parameters/environmentId'
+      - $ref: '#/components/parameters/organizationId'
+    get:
+      operationId: getAllPartnerProfiles
+      responses:
+        '200':
+          description: 'Get All partner profiles'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/partnerprofile'
+    post:
+      operationId: createPartnerProfile
+      responses:
+        '201':
+          $ref: '#/components/responses/POST_ID_Response'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partnerprofile'
+        required: true
+  /organizations/{organizationId}/environments/{environmentId}/partnerprofiles/{partnerId}:
+    parameters:
+      - $ref: '#/components/parameters/environmentId'
+      - $ref: '#/components/parameters/organizationId'
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      operationId: getPartnerProfile
+      responses:
+        '200':
+          description: 'Get a partner profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partnerprofile'
+    delete:
+      operationId: deletePartnerProfile
+      responses:
+        '204':
+          description: 'No content'
 
   /organizations/{organizationId}/environments/{environmentId}/partners:
     parameters:
@@ -2637,9 +2686,6 @@ components:
           required:
             - identifierTypeQualifierId
             - status
-            - qualifierLabel
-            - typeLabel
-            - code
             - value
     identifierType:
       title: IdentifierType
@@ -2685,6 +2731,38 @@ components:
             environmentId:
               type: string
           type: object
+    partnerprofile:
+      title: Partner Profile
+      description: Partner Profile Type
+      properties:
+        partnerType:
+          type: string
+        environmentId:
+          type: string
+        name:
+          type: string
+        identifiers:
+          items:
+            $ref: '#/components/schemas/partnerprofileidentifier'
+      required:
+        - partnerType
+        - environmentId
+        - name
+        - identifiers
+    partnerprofileidentifier:
+      title: "Partner Profile Identifier"
+      description: "Partner Profile Identifier Type"
+      properties:
+        value:
+          type: string
+        identifierTypeQualifierId:
+          type: string
+        status:
+          type: string
+      required:
+        - value
+        - identifierTypeQualifierId
+        - status
     partner:
       title: Partner
       description: Partner Type
