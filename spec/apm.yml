@@ -70,13 +70,13 @@ paths:
         required: true
   /organizations/{organizationId}/environments/{environmentId}/partnerprofiles/{partnerId}:
     parameters:
-      - $ref: '#/components/parameters/environmentId'
-      - $ref: '#/components/parameters/organizationId'
       - name: partnerId
         in: path
         required: true
         schema:
           type: string
+      - $ref: '#/components/parameters/environmentId'
+      - $ref: '#/components/parameters/organizationId'
 
     get:
       operationId: getPartnerProfile
