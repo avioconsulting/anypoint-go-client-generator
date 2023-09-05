@@ -802,7 +802,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
+                  $ref: '#/components/schemas/Document'
       description: Get all documents
       operationId: getAllDocuments
     post:
@@ -819,7 +819,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: '#/components/schemas/Document'
             example:
                 id: def07900-a5cb-47d2-a928-2b16d6510972
                 name: X12-v005010-850
@@ -886,7 +886,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/Document"
             example:
               id: def07900-a5cb-47d2-a928-2b16d6510972
               name: X12-v005010-850
@@ -3645,8 +3645,14 @@ components:
           type: string
         documentTypeParameters:
           type: string
-        dwFile:
-          type: object
+        # dwFile:
+        #   type: object
+      required:
+       - name
+       - isStandard
+       - documentFlowDirection
+       - documentTypeRole
+       - ediDocumentTypeId
   responses:
     trait_isPageable_200:
       description: ''
