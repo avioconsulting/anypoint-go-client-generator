@@ -1547,7 +1547,11 @@ paths:
     post:
       responses:
         '201':
-          $ref: '#/components/responses/POST_ID_Response'
+          description: "returns id"
+          content:
+            application/json:
+              schema:
+                type: string
         '400':
           description: ''
         '500':
@@ -1558,7 +1562,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/Endpoint"
             example:
               simpleEndpoint:
                 id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
@@ -1630,7 +1634,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/Endpoint"
               example:
                 simpleEndpoint:
                   id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
@@ -1712,7 +1716,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: "#/components/schemas/Endpoint"
             example:
               simpleEndpoint:
                 id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
@@ -3435,6 +3439,97 @@ components:
         - endpointTypeId
         - endpointRole
         - config
+    Endpoint:
+      title: Endpoint
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        environmentId:
+          type: string
+        endpointTypeId:
+          type: string
+        partnerId:
+          type: string
+        endpointRole:
+          type: string
+          enum:
+          - RECEIVE
+          - SEND
+          - RECEIVE_ACK
+          - PRE_API
+          - POST_API
+          - STORAGE_API
+        endpointType:
+          type: string
+        visibility:
+          type: string
+        supportedFormatTypes:
+          type: string
+        config:
+          $ref: '#/components/schemas/EndpointConfig'
+    EndpointConfig:
+      title: Endpoint Config object
+      type: object
+      additionalProperties: true
+      properties:
+        configName:
+          type: string
+        serverAddress:
+          type: string
+        serverPort:
+          type: integer
+        authMode:
+          $ref: '#/components/schemas/authModeConfig'
+        path:
+          type: string
+        movedPath:
+          type: string
+        pollingFrequency:
+          type: integer
+        sizeCheckWaitTime:
+          type: integer
+        responseTimeout:
+          type: integer
+        connectionIdleTimeout:
+          type: integer
+        manageWithApiManager:
+          type: boolean
+        autoDiscoveryId:
+          type: string
+        credentialType:
+          type: string
+        usage:
+          type: string
+        associatedMessageTypeId:
+          type: string
+        protocol:
+          type: string
+        validWithoutPartner:
+          type: boolean
+        associatedReferenceIdentifierId:
+          type: string
+        fileNamePattern:
+          type: string
+        vpc:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+    authModeConfig:
+      title: AuthModeConfig
+      type: object
+      properties:
+        authType:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
     EndpointDeployment:
       title: EndpointDeployment
       type: object
