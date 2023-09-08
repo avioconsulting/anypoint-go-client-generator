@@ -2951,7 +2951,10 @@ components:
             name:
               type: string
             direction:
-              $ref: '#/components/schemas/directionType'
+              type: string
+              enum:
+              - INBOUND
+              - OUTBOUND
             partnerFromId:
               type: string
             partnerToId:
