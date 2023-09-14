@@ -3110,6 +3110,237 @@ components:
       required:
         - description
         - label
+    ediFormatConfiguration:
+      title: EDI Format Configuration
+      type: object
+      properties:
+        configType:
+          type: string
+        formatType:
+          type: string
+        formatTypeId:
+          type: string
+        partnerId:
+          type: string
+        ackEndpointId:
+          type: string
+        configId:
+          type: string
+        isTemplate:
+          type: boolean
+        characterSetAndDelimitersSettings:
+          type: object
+          properties:
+            characterEncoding:
+              type: string
+            dataSeparator:
+              type: string
+            componentSeparator:
+              type: string
+            repetitionSeparator:
+              type: string
+            segmentTerminator:
+              type: string
+            releaseCharacter:
+              type: string
+            lineEnding:
+              type: string
+            testIndicator:
+              type: string
+            writeUseCRLFLastLine:
+              type: boolean
+        writeSettings:
+          type: object
+          properties:
+            sendSyntaxVersion:
+              type: string
+            alwaysSendUNA:
+              type: boolean
+            enforceWriteCharacters:
+              type: boolean
+            writeEnforceLengthLimits:
+              type: string
+            requestAcks:
+              type: boolean
+            enforceCodeSetValidationsWrite:
+              type: boolean
+        edifactControlNumberSettings:
+          type: object
+          properties:
+            requireUniqueInterchanges:
+              type: boolean
+            requireUniqueMessages:
+              type: boolean
+            initialControlNumber:
+              type: string
+        edifactParserSettings:
+          type: object
+          properties:
+            enforceLengthLimits:
+              type: boolean
+            enforceValueRepeats:
+              type: boolean
+            enforceReadCharacters:
+              type: boolean
+            allowUnknownSegments:
+              type: boolean
+            enforceSegmentOrder:
+              type: boolean
+            allowUnusedSegments:
+              type: boolean
+            enforceSegmentRepeats:
+              type: boolean
+            enforceCodeSetValidationsParse:
+              type: boolean
+            characterEncodingOverride:
+              type: string
+        separators:
+          type: object
+          properties:
+            dataSeparator: 
+              type: string
+            componentSeparator: 
+              type: string
+            repetitionSeparator: 
+              type: string
+            segmentTerminator: 
+              type: string
+            releaseCharacter: 
+              type: string
+        acknowledgementSettings:
+          type: object
+          properties:
+            TA:
+              type: boolean
+            FA:
+              type: boolean
+        writerSettings:
+          type: object
+          properties:
+            writeEnforceLengthLimits:
+              type: string
+            enforceConditionalRulesOnWriter:
+              type: boolean
+            enforceCodeSetValidationsWrite:
+              type: boolean
+        characterSetEncoding:
+          type: object
+          properties:
+            characterSet:
+              type: string
+            characterEncoding:
+              type: string
+            lineEndingBetweenSegments:
+              type: string
+            componentElementSeparatorISA16:
+              type: string
+            writeUseCRLFLastLine:
+              type: boolean
+        terminatorDelimiter:
+          type: object
+          properties:
+            segmentTerminatorCharacter:
+              type: string
+            dataElementDelimiter:
+              type: string
+            stringSubstituionCharacter:
+              type: string
+        controlNumberSettings:
+          type: object
+          properties:
+            initialInterchangeControlNumber:
+              type: string
+            initialGSControlNumber:
+              type: string
+            initialTransactionSetControlNumber:
+              type: string
+            requireUniqueGSControlNumbers:
+              type: boolean
+            requireUniqueTransactionSetControlNumber:
+              type: boolean
+            requireUniqueISAcontrolNumbersISA13:
+              type: boolean
+            requireUniqueGSControlNumbersGS06:
+              type: boolean
+            requireUniqueTransactionSetControlNumbersST02:
+              type: boolean
+        characterSetAndEncoding:
+          type: object
+          properties:
+            characterSet:
+              type: string
+            characterEncoding:
+              type: string
+            lineEndingBetweenSegments:
+              type: string
+            componentElementSeparatorISA16:
+              type: string
+            writeUseCRLFLastLine:
+              type: boolean
+        parserSettings:
+          type: object
+          properties:
+            ackEndpointId:
+              type: string
+            failDocumentWhenValueLengthOutsideAllowedRange:
+              type: boolean
+            failDocumentWhenInvalidCharacterInValue:
+              type: boolean
+            failDocumentIfValueIsRepeatedTooManyTimes:
+              type: boolean
+            failDocumentIfUnknownSegmentsAreUsed:
+              type: boolean
+            failDocumentWhenSegmentsAreOutOfOrder:
+              type: boolean
+            failDocumentWhenTooManyRepeatsOfSegment:
+              type: boolean
+            failDocumentWhenUnusedSegmentsAreIncluded:
+              type: boolean
+            enforceConditionalRulesOnParser:
+              type: boolean
+            enforceCodeSetValidationsParse:
+              type: boolean
+            acknowledgeEveryTransaction:
+              type: boolean
+            generateTA1:
+              type: boolean
+            generate999:
+              type: boolean
+            require997:
+              type: boolean
+        envelopeHeaders:
+          type: object
+          properties:
+            authInfoQualifierISA01:
+              type: string
+            authInfoISA02:
+              type: string
+            securityInfoQualifierISA03:
+              type: string
+            securityInfoISA04:
+              type: string
+            interchangeReceiverIdQualifierISA07:
+              type: string
+            interchangeReceiverIdISA07:
+              type: string
+            repetitionSeparatorCharacterISA11:
+              type: string
+            repetitionInterchangeAcknowledmentsISA14:
+              type: string
+            defaultInterchangeUsageIndicatorISA15:
+              type: string
+            componentElementSeparator:
+              type: string
+            interchangeControlVersionNumberISA12:
+              type: string
+            interchangeControlStandardsIdentifierISA11:
+              type: string
+            responsibleAgencyCodeGS07:
+              type: string
+            releaseNumberGS08:
+              type: string
+            implementationConventionReferenceST03:
+              type: string
     ediFormatPartner:
       title: EDI Format Partner
       type: object
