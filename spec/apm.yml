@@ -543,7 +543,7 @@ paths:
             example:
               $ref: '#/components/examples/X12Configuration'
             schema:
-              type: object
+              $ref: "#/components/schemas/ediFormatConfiguration"
         required: true
     parameters:
       - name: format
@@ -566,6 +566,7 @@ paths:
           content:
             application/json:
               schema:
+                $ref: "#/components/schemas/ediFormatConfiguration"
                 example:
                   $ref: '#/components/examples/X12Configuration'
         '404':
@@ -2987,7 +2988,11 @@ components:
               type: string
             status:
               default: DRAFT
-              $ref: '#/components/schemas/documentFlowStatusType'
+              type: string
+              enum:
+                - DRAFT
+                - DEPLOYED
+                - ALL
             version:
               type: integer
             preProcessingEndpointId:
@@ -3008,7 +3013,41 @@ components:
                 $ref: '#/components/schemas/documentMappingConfig'
             receivingAckConfig:
               $ref: '#/components/schemas/BaseAckConfig'
+            partnerIdentifiersConfig:
+              type: object
+              properties:
+                useAllHostIdentifiers:
+                  type: boolean
+                useAllPartnerIdentifiers:
+                  type: boolean
+                identifiers:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PartnerIdentifiersConfigIdentifiers'
           type: object
+          required:
+            - status
+    PartnerIdentifiersConfigIdentifiers:
+      type: object
+      properties:
+        id:
+          type: string
+        configId:
+          type: string
+        identifierId:
+          type: string
+        identifierTypeId:
+          type: string
+        identifierTypeName:
+          type: string
+        identifierCode:
+          type: string
+        identifierValue:
+          type: string
+        partnerId:
+          type: string
+        flowSection:
+          type: string
     directionType:
       enum:
         - INBOUND
