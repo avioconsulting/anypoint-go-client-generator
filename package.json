@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate": "export ANYPOINT_GENERATOR_GO_DEST=`pwd`/dist && npx openapi-generator-cli generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@souf",
