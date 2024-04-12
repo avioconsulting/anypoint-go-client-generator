@@ -43,6 +43,62 @@ paths:
                     description: Other Contact
         '404':
           description: 'Not found'
+  /organizations/{organizationId}/environments/{environmentId}/customAttributes:
+    parameters:
+      - $ref: '#/components/parameters/environmentId'
+      - $ref: '#/components/parameters/organizationId'
+      - name: partnerId
+        in: query
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: createCustomAttribute
+      responses:
+        '202':
+          $ref: '#/components/responses/POST_ID_Response'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAttribute'
+        required: true
+  /organizations/{organizationId}/environments/{environmentId}/customAttributes/{customAttributeId}:
+    parameters:
+      - name: customAttributeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/environmentId'
+      - $ref: '#/components/parameters/organizationId'
+
+    get:
+      operationId: getCustomAttribute
+      responses:
+        '200':
+          description: 'Get a custom Attribute'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customAttribute'
+    patch:
+      operationId: updateCustomAttribute
+      responses:
+        '204':
+          description: 'No content'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAttribute'
+        required: true
+
+    delete:
+      operationId: deleteCustomAttribute
+      responses:
+        '204':
+          description: 'No content'
   /organizations/{organizationId}/environments/{environmentId}/partnerprofiles:
     parameters:
       - $ref: '#/components/parameters/environmentId'
@@ -592,9 +648,9 @@ paths:
           application/json:
             example:
               example:
-                  $ref: '#/components/examples/X12Configuration'
+                $ref: '#/components/examples/X12Configuration'
             schema:
-              type: object
+              $ref: "#/components/schemas/ediFormatConfiguration"
         required: true
     delete:
       responses:
@@ -2736,6 +2792,22 @@ components:
             environmentId:
               type: string
           type: object
+    customAttribute:
+      title: Custom Attribute
+      description: Custom Attribute
+      properties:
+        id:
+          type: string
+        searchable:
+          type: boolean
+        label:
+          type: string
+        alias:
+          type: string
+      required:
+        - searchable
+        - label
+        - alias
     partnerprofile:
       title: Partner Profile
       description: Partner Profile Type
@@ -3153,6 +3225,8 @@ components:
       title: EDI Format Configuration
       type: object
       properties:
+        id:
+          type: string
         configType:
           type: string
         formatType:
@@ -3187,7 +3261,7 @@ components:
             testIndicator:
               type: string
             writeUseCRLFLastLine:
-              type: boolean
+              type: string
         writeSettings:
           type: object
           properties:
@@ -3198,7 +3272,7 @@ components:
             enforceWriteCharacters:
               type: boolean
             writeEnforceLengthLimits:
-              type: string
+              type: boolean
             requestAcks:
               type: boolean
             enforceCodeSetValidationsWrite:
@@ -3257,7 +3331,7 @@ components:
           type: object
           properties:
             writeEnforceLengthLimits:
-              type: string
+              type: boolean
             enforceConditionalRulesOnWriter:
               type: boolean
             enforceCodeSetValidationsWrite:
@@ -3272,6 +3346,8 @@ components:
             lineEndingBetweenSegments:
               type: string
             componentElementSeparatorISA16:
+              type: string
+            substitutionCharacter:
               type: string
             writeUseCRLFLastLine:
               type: boolean
@@ -3316,11 +3392,15 @@ components:
               type: string
             writeUseCRLFLastLine:
               type: boolean
+            substitutionCharacter:
+              type: string
         parserSettings:
           type: object
           properties:
             ackEndpointId:
               type: string
+            checkDuplicateDays:
+              type: integer
             failDocumentWhenValueLengthOutsideAllowedRange:
               type: boolean
             failDocumentWhenInvalidCharacterInValue:
@@ -3568,6 +3648,9 @@ components:
         needCertificate:
           default: true
           type: boolean
+        certificateId:
+          default: true
+          type: string
       required:
         - insecure
         - needCertificate
@@ -3788,6 +3871,8 @@ components:
           type: string
         fileNamePattern:
           type: string
+        tlsContext:
+          $ref: '#/components/schemas/TLSContext'
         vpc:
           type: object
           properties:
@@ -3802,6 +3887,14 @@ components:
         username:
           type: string
         password:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        clientIdHeader:
+          type: string
+        clientSecretHeader:
           type: string
     EndpointDeployment:
       title: EndpointDeployment
@@ -4102,7 +4195,7 @@ components:
           require997: false
           generate999: false
           generateTA1: false
-          checkDuplicateDays: 30
+          checkDuplicateDays: 300
           enforceConditionalRulesOnParser: false
           enforceCodeSetValidationsParse: false
           acknowledgeEveryTransaction: false
