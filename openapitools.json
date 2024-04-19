@@ -6,10 +6,10 @@
     "generators": {
       "golang": {
         "generatorName": "go",
-        "output": "$ANYPOINT_GENERATOR_GO_DEST/#{name}",
-        "glob": "spec/apm.{json,yaml,yml}",
-        "gitUserId": "mulesoft-consulting",
-        "gitRepoId": "anypoint-client-go",
+        "output": "#{name}",
+        "glob": "spec/apm.yml",
+        "gitUserId": "avioconsulting",
+        "gitRepoId": "anypoint-go-client-generator",
         "additionalProperties": {
           "isGoSubmodule": true,
           "packageName": "#{name}",

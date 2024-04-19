@@ -1,60 +1,42 @@
-# name: Cloudhub Client Generator Pipeline
+name: Go Client Generator
 
-# # Controls when the action will run. 
-# on:
-#   # Triggers the workflow on push
-#   push:
-#     branches:
-#       - master
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
+on:
+  push:
+    branches:
+      - master
 
-# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# jobs:
-#   generate_code:
-#     # The type of runner that the job will run on
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [14.x]
-#     env:
-#       CLIENT_GO_REPO: git@github.com:avioconsulting/anypoint-go-client.git
-#       CLIENT_GO_BRANCH: dev
-#       GIT_SSH_KEY: ${{ secrets.GIT_SSH_KEY }}
+jobs:
+  create-tag:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with: 
+          ref: 'master'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-#     steps:
-#       - name: Set Up JDK 1.8
-#         uses: actions/setup-java@v1
-#         with:
-#           java-version: 1.8
-#       - uses: webfactory/ssh-agent@v0.5.1
-#         with:
-#           ssh-private-key: ${{ env.GIT_SSH_KEY }}
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
+      - name: Set Version Number based on Date and build number
+        if: ${{ !inputs.test-only }}
+        id: version
+        run: |
+          PATCH+=$(date +'%Y%m%d')
+          PATCH+=${{ github.run_number }}
+          echo VERSION_OUTPUT=1.0.$PATCH >> $GITHUB_OUTPUT
 
-#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#       - uses: actions/checkout@v2
-#       - name: Copy Anypoint-client-generator project
-#         run: |
-#           git config --global user.email "pipeline@avioconsulting.com"
-#           git config --global user.name "pipeline-anypoint-clients-generator"
-#           export GENERATOR_FOLDER=`pwd`
-#           export GO_CLIENT_FOLDER=`pwd`/dist/avioconsulting
-#           export ANYPOINT_GENERATOR_GO_DEST="$GO_CLIENT_FOLDER"
-#           npm install 
-#           git clone --branch ${{env.CLIENT_GO_BRANCH}} ${{env.CLIENT_GO_REPO}} $GO_CLIENT_FOLDER
-#           npx openapi-generator-cli generate
-#           cd $GO_CLIENT_FOLDER
-#           git add .
-#           git commit -am "Generates modules from pipeline."
-#           git push
+      - name: Retrieve tag exists flag
+        uses: mukunku/tag-exists-action@v1.4.0
+        id: checkTag
+        with:
+          tag: ${{ steps.version.outputs.VERSION_OUTPUT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-
-
-
-
-
+      - name: Verify and create tag if not exists
+        if: ${{ steps.checkTag.outputs.exists == 'false' }}
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          default_bump: false
+          custom_tag: ${{ steps.version.outputs.VERSION_OUTPUT }}
+          tag_prefix: "v"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
