@@ -1,0 +1,6286 @@
+openapi: 3.0.1
+info:
+  description: Anypoint Partner Manager - Partners API
+  title: Partner Manager Partners API
+  version: v1.0.0
+servers:
+- description: Anypoint Cloudhub
+  url: https://anypoint.mulesoft.com/partnermanager/partners/api/v1
+- description: Anypoint Cloudhub EU
+  url: https://eu1.anypoint.mulesoft.com/partnermanager/partners/api/v1
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/contactTypes:
+    get:
+      description: Get List of supported contact types
+      operationId: getAllContactTypes
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                  name: Business
+                  label: Business Contact
+                  description: Business Contact
+                - id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                  name: Business
+                  label: Business Contact
+                  description: Technical Contact
+                - id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                  name: Business
+                  label: Business Contact
+                  description: Other Contact
+                items:
+                  $ref: '#/components/schemas/contactType'
+                type: array
+          description: 'Get list '
+        "404":
+          description: Not found
+  /organizations/{organizationId}/environments/{environmentId}/customAttributes:
+    post:
+      operationId: createCustomAttribute
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAttribute'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+  /organizations/{organizationId}/environments/{environmentId}/customAttributes/{customAttributeId}:
+    delete:
+      operationId: deleteCustomAttribute
+      parameters:
+      - explode: false
+        in: path
+        name: customAttributeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No content
+    get:
+      operationId: getCustomAttribute
+      parameters:
+      - explode: false
+        in: path
+        name: customAttributeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customAttribute'
+          description: Get a custom Attribute
+    patch:
+      operationId: updateCustomAttribute
+      parameters:
+      - explode: false
+        in: path
+        name: customAttributeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAttribute'
+        required: true
+      responses:
+        "204":
+          description: No content
+  /organizations/{organizationId}/environments/{environmentId}/partnerprofiles:
+    get:
+      operationId: getAllPartnerProfiles
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/partnerprofile'
+                type: array
+          description: Get All partner profiles
+    post:
+      operationId: createPartnerProfile
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partnerprofile'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+  /organizations/{organizationId}/environments/{environmentId}/partnerprofiles/{partnerId}:
+    delete:
+      operationId: deletePartnerProfile
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No content
+    get:
+      operationId: getPartnerProfile
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partnerprofile'
+          description: Get a partner profile
+  /organizations/{organizationId}/environments/{environmentId}/partners:
+    get:
+      description: Get all partners
+      operationId: getAllPartners
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  name: Melora
+                  description: Description
+                  websiteUrl: ""
+                  status:
+                    id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                    startDate: 2019-05-28
+                    endDate: 2019-05-28
+                    status: ACTIVE
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  hostFlag: false
+                items:
+                  $ref: '#/components/schemas/partner'
+                type: array
+          description: List of Partners
+    post:
+      description: Create a new partner
+      operationId: createPartner
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+              name: Melora
+              description: Description
+              websiteUrl: ""
+              status:
+                id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                startDate: 2019-05-28
+                endDate: 2019-05-28
+                status: ACTIVE
+              environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+              hostFlag: false
+            schema:
+              $ref: '#/components/schemas/partner'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400":
+          description: Bad request
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}:
+    delete:
+      description: Delete partner
+      operationId: deletePartner
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No content
+    get:
+      description: Get Partner
+      operationId: getPartner
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                name: Melora
+                description: Description
+                websiteUrl: ""
+                status:
+                  id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                  startDate: 2019-05-28
+                  endDate: 2019-05-28
+                  status: ACTIVE
+                environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                hostFlag: false
+              schema:
+                $ref: '#/components/schemas/partner'
+          description: Get Partner
+        "404":
+          description: Not Found
+    put:
+      description: Replace partner
+      operationId: replacePartner
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+              name: Melora
+              description: Description
+              websiteUrl: ""
+              status:
+                id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                startDate: 2019-05-28
+                endDate: 2019-05-28
+                status: ACTIVE
+              environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+              hostFlag: false
+            schema:
+              $ref: '#/components/schemas/partner'
+        required: true
+      responses:
+        "204":
+          description: No content
+        "400":
+          description: Bad Request
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/contacts:
+    get:
+      description: Get all contacts
+      operationId: getAllContacts
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 838aaf51-8c6d-4bea-a608-3c1eb05a83b3
+                name: TEST_NAME_256
+                email: some738@domain.com
+                phoneNumber: ""
+                status: ACTIVE
+                contactType:
+                  id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                  name: Business
+                  label: Business Contact
+                  description: Business Contact
+              schema:
+                items:
+                  $ref: '#/components/schemas/contact'
+                type: array
+    post:
+      description: Create a new contact
+      operationId: createContact
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 838aaf51-8c6d-4bea-a608-3c1eb05a83b3
+              name: TEST_NAME_256
+              email: some738@domain.com
+              phoneNumber: ""
+              status: ACTIVE
+              contactType:
+                id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                name: Business
+                label: Business Contact
+                description: Business Contact
+            schema:
+              $ref: '#/components/schemas/contact'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/contacts/{contactId}:
+    delete:
+      description: Delete contact
+      operationId: deleteContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Contact
+      operationId: getContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 838aaf51-8c6d-4bea-a608-3c1eb05a83b3
+                name: TEST_NAME_256
+                email: some738@domain.com
+                phoneNumber: ""
+                status: ACTIVE
+                contactType:
+                  id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                  name: Business
+                  label: Business Contact
+                  description: Business Contact
+              schema:
+                $ref: '#/components/schemas/contact'
+        "404": {}
+        "500": {}
+    put:
+      description: Replace contact
+      operationId: replaceContact
+      parameters:
+      - explode: false
+        in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 838aaf51-8c6d-4bea-a608-3c1eb05a83b3
+              name: TEST_NAME_256
+              email: some738@domain.com
+              phoneNumber: ""
+              status: ACTIVE
+              contactType:
+                id: 50615d27-0356-47fc-bd1e-440c992cd98e
+                name: Business
+                label: Business Contact
+                description: Business Contact
+            schema:
+              $ref: '#/components/schemas/contact'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/identifiers:
+    get:
+      description: Get all identifiers
+      operationId: getAllIdentifiers
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: ecb01f12-5b25-4d8b-a5e8-f3525f13e351
+                identifierTypeQualifierId: 25c1bc8a-801f-4947-a2a6-7721ef971460
+                status: ACTIVE
+                qualifierLabel: AS2 Identity
+                typeLabel: AS2 Identity
+                code: AS2
+                value: TEST_VALUE_493
+              schema:
+                items:
+                  $ref: '#/components/schemas/identifier'
+                type: array
+    post:
+      description: Create a new identifier
+      operationId: createIdentifier
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: ecb01f12-5b25-4d8b-a5e8-f3525f13e351
+              identifierTypeQualifierId: 25c1bc8a-801f-4947-a2a6-7721ef971460
+              status: ACTIVE
+              qualifierLabel: AS2 Identity
+              typeLabel: AS2 Identity
+              code: AS2
+            schema:
+              $ref: '#/components/schemas/identifier'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/identifiers/{identifierId}:
+    delete:
+      description: Delete identifier
+      operationId: deleteIdentifier
+      parameters:
+      - explode: false
+        in: path
+        name: identifierId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Identifier
+      operationId: getIdentifier
+      parameters:
+      - explode: false
+        in: path
+        name: identifierId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: ecb01f12-5b25-4d8b-a5e8-f3525f13e351
+                identifierTypeQualifierId: 25c1bc8a-801f-4947-a2a6-7721ef971460
+                status: ACTIVE
+                qualifierLabel: AS2 Identity
+                typeLabel: AS2 Identity
+                code: AS2
+              schema:
+                $ref: '#/components/schemas/identifier'
+    put:
+      description: Replace identifier
+      operationId: replaceIdentifier
+      parameters:
+      - explode: false
+        in: path
+        name: identifierId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: ecb01f12-5b25-4d8b-a5e8-f3525f13e351
+              identifierTypeQualifierId: 25c1bc8a-801f-4947-a2a6-7721ef971460
+              status: ACTIVE
+              qualifierLabel: AS2 Identity
+              typeLabel: AS2 Identity
+              code: AS2
+            schema:
+              $ref: '#/components/schemas/identifier'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/logo:
+    get:
+      description: Get Partner Logo
+      operationId: getPartnerLogo
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200": {}
+        "404": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/statuses/{statusId}:
+    get:
+      description: Get statuses
+      operationId: getStatus
+      parameters:
+      - explode: false
+        in: path
+        name: statusId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: b951aaee-4701-4bec-b535-4f7f804bce48
+                startDate: 2019-06-04
+                endDate: 2019-06-04
+                status: DRAFT
+              schema:
+                $ref: '#/components/schemas/timedStatus'
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/ediFormats/{format}/configurations:
+    get:
+      description: Get all configurations
+      operationId: getAllConfigurations
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example:
+                    $ref: '#/components/examples/X12Configuration'
+                  type: object
+                type: array
+    post:
+      description: Create a new configuration
+      operationId: createConfiguration
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              $ref: '#/components/examples/X12Configuration'
+            schema:
+              $ref: '#/components/schemas/ediFormatConfiguration'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/ediFormats/{format}/configurations/{configId}:
+    delete:
+      description: Delete configuration
+      operationId: deleteConfiguration
+      parameters:
+      - explode: false
+        in: path
+        name: configId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Configuration
+      operationId: getConfiguration
+      parameters:
+      - explode: false
+        in: path
+        name: configId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ediFormatConfiguration'
+        "404": {}
+        "500": {}
+    put:
+      description: Replace configuration
+      operationId: replaceConfiguration
+      parameters:
+      - explode: false
+        in: path
+        name: configId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                $ref: '#/components/examples/X12Configuration'
+            schema:
+              $ref: '#/components/schemas/ediFormatConfiguration'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/ediFormats/{format}/documents:
+    get:
+      description: Get all documents
+      operationId: getEdiFormatDocuments
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - id: def07900-a5cb-47d2-a928-2b16d6510972
+                  name: X12-v005010-850
+                  isStandard: true
+                  ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                  baseType:
+                    id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                    documentName: "850"
+                    label: "850"
+                    schemaPath: /schemas/x12/5010/850.esl
+                    description: ""
+                    formatType: X12
+                    version: v005010
+                items:
+                  type: object
+                type: array
+    post:
+      description: Create a new document
+      operationId: createEdiFormatDocument
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              simpleDocumentPartner:
+                id: def07900-a5cb-47d2-a928-2b16d6510972
+                name: X12-v005010-850
+                isStandard: true
+                ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                baseType:
+                  id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                  documentName: "850"
+                  label: "850"
+                  schemaPath: /schemas/x12/5010/850.esl
+                  description: ""
+                  formatType: X12
+                  version: v005010
+            schema:
+              type: object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/ediFormats/{format}/documents/{docId}:
+    delete:
+      description: Delete document
+      operationId: deleteEdiFormatDocument
+      parameters:
+      - explode: false
+        in: path
+        name: docId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Document
+      operationId: getEdiFormatDocument
+      parameters:
+      - explode: false
+        in: path
+        name: docId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  simpleDocumentPartner:
+                    id: def07900-a5cb-47d2-a928-2b16d6510972
+                    name: X12-v005010-850
+                    isStandard: true
+                    ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                    baseType:
+                      id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                      documentName: "850"
+                      label: "850"
+                      schemaPath: /schemas/x12/5010/850.esl
+                      description: ""
+                      formatType: X12
+                      version: v005010
+        "404": {}
+        "500": {}
+    put:
+      description: Replace document
+      operationId: replaceEdiFormatDocument
+      parameters:
+      - explode: false
+        in: path
+        name: docId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: def07900-a5cb-47d2-a928-2b16d6510972
+              name: X12-v005010-850
+              isStandard: true
+              ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+              baseType:
+                id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                documentName: "850"
+                label: "850"
+                schemaPath: /schemas/x12/5010/850.esl
+                description: ""
+                formatType: X12
+                version: v005010
+            schema:
+              type: object
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/documents:
+    get:
+      description: Get all documents
+      operationId: getAllDocuments
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: def07900-a5cb-47d2-a928-2b16d6510972
+                name: X12-v005010-850
+                isStandard: true
+                ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                baseType:
+                  id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                  documentName: "850"
+                  label: "850"
+                  schemaPath: /schemas/x12/5010/850.esl
+                  description: ""
+                  formatType: X12
+                  version: v005010
+              schema:
+                items:
+                  $ref: '#/components/schemas/Document'
+                type: array
+    post:
+      description: Create a new document
+      operationId: createDocument
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: def07900-a5cb-47d2-a928-2b16d6510972
+              name: X12-v005010-850
+              isStandard: true
+              ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+              baseType:
+                id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                documentName: "850"
+                label: "850"
+                schemaPath: /schemas/x12/5010/850.esl
+                description: ""
+                formatType: X12
+                version: v005010
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/documents/{documentById}:
+    delete:
+      description: Delete document
+      operationId: deleteDocument
+      parameters:
+      - explode: false
+        in: path
+        name: documentById
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Document
+      operationId: getDocument
+      parameters:
+      - explode: false
+        in: path
+        name: documentById
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: def07900-a5cb-47d2-a928-2b16d6510972
+                name: X12-v005010-850
+                isStandard: true
+                ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                baseType:
+                  id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                  documentName: "850"
+                  label: "850"
+                  schemaPath: /schemas/x12/5010/850.esl
+                  description: ""
+                  formatType: X12
+                  version: v005010
+              schema:
+                $ref: '#/components/schemas/Document'
+        "404": {}
+        "500": {}
+    put:
+      description: Replace document
+      operationId: replaceDocument
+      parameters:
+      - explode: false
+        in: path
+        name: documentById
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: def07900-a5cb-47d2-a928-2b16d6510972
+              name: X12-v005010-850
+              isStandard: true
+              ediDocumentTypeId: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+              baseType:
+                id: 1b181fc7-ce2a-48ee-9208-3681cd73e10a
+                documentName: "850"
+                label: "850"
+                schemaPath: /schemas/x12/5010/850.esl
+                description: ""
+                formatType: X12
+                version: v005010
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/certificates:
+    get:
+      description: Get all Certificates
+      operationId: getAllCertificates
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200": {}
+    post:
+      description: Create a new Certificate
+      operationId: createPartnerCertificate
+      parameters:
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                certType:
+                  type: string
+                certName:
+                  type: string
+                certFile:
+                  type: string
+              required:
+              - certFile
+              - certName
+              - certType
+              type: object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/partners/{partnerId}/certificates/{certificateId}:
+    get:
+      description: Get Certificate
+      operationId: getPartnerCertificate
+      parameters:
+      - explode: false
+        in: path
+        name: certificateId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: partnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/identifierTypes:
+    get:
+      description: Get all identifierTypes
+      operationId: getAllIdentifierTypes
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 65715d63-b628-4eb0-913d-cfdb55057c15
+                name: AS2
+                label: AS2 Identity
+                description: ""
+                readonly: true
+                qualifiers:
+                - id: 25c1bc8a-801f-4947-a2a6-7721ef971460
+                  identifierTypeId: 65715d63-b628-4eb0-913d-cfdb55057c15
+                  code: AS2
+                  label: AS2 Identity
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                environment_id: 00000000-0000-0000-0000-000000000000
+              - id: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                name: X12-ISA
+                label: X12 - ISA
+                description: ""
+                readonly: true
+                qualifiers:
+                - id: dacbb21c-f452-434e-985f-c8c588ebf2f2
+                  identifierTypeId: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                  code: "01"
+                  label: 01 (Duns Number)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                - id: 789fb88c-c353-46f6-ba7e-2f9784e5e504
+                  identifierTypeId: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                  code: "08"
+                  label: 08 (UCC EDI Number)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                - id: 26432f80-b58b-4c96-aac6-58af5d5580fc
+                  identifierTypeId: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                  code: "12"
+                  label: 12 (Phone Number)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                - id: 2e92b8d1-0510-4d59-ac3b-953d08127f78
+                  identifierTypeId: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                  code: "14"
+                  label: 14 (Duns Number and Suffix Number)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                - id: fc397111-9590-4fea-a238-5853d575e04e
+                  identifierTypeId: ce7e0612-8913-4bac-a99b-7f7c6c8f456f
+                  code: ZZ
+                  label: ZZ (Mutually Defined)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                environment_id: 00000000-0000-0000-0000-000000000000
+              - id: ed100353-3187-4535-b400-f6a3fa0b56c3
+                name: X12-GS
+                label: X12 - GS
+                description: ""
+                readonly: true
+                qualifiers:
+                - id: 5982e3de-4878-44ec-b55d-a39d60064250
+                  identifierTypeId: ed100353-3187-4535-b400-f6a3fa0b56c3
+                  code: GS
+                  label: Group ID (GS)
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                environment_id: 00000000-0000-0000-0000-000000000000
+              - id: 05ebfb78-1fad-45ee-9a7d-53a6766a8c4f
+                name: DUNS
+                label: DUNS
+                description: ""
+                readonly: true
+                qualifiers:
+                - id: 3ca16584-94b7-4d97-b57c-e5d6600bd441
+                  identifierTypeId: 05ebfb78-1fad-45ee-9a7d-53a6766a8c4f
+                  code: DUNS
+                  label: DUNS Number
+                  segmentIdentifier: null
+                  descritpion: null
+                  environmentId: 00000000-0000-0000-0000-000000000000
+                environment_id: 00000000-0000-0000-0000-000000000000
+              schema:
+                items:
+                  $ref: '#/components/schemas/identifierType'
+                type: array
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/identifierTypes/{identifierTypeId}:
+    get:
+      description: Get identifierTypes
+      operationId: getIdentifierType
+      parameters:
+      - explode: false
+        in: path
+        name: identifierTypeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                simpleIdentifierType:
+                  id: 05ebfb78-1fad-45ee-9a7d-53a6766a8c4f
+                  name: DUNS Modify
+                  label: DUNS
+                  description: ""
+                  readonly: true
+                  qualifiers:
+                  - id: 3ca16584-94b7-4d97-b57c-e5d6600bd441
+                    identifierTypeId: 3ca16584-94b7-4d97-b57c-e5d6600bd441
+                    code: DUNS
+                    label: DUNS Number
+                    segmentIdentifier: null
+                    descritpion: description
+                    environmentId: 00000000-0000-0000-0000-000000000000
+                  environment_id: 00000000-0000-0000-0000-000000000000
+              schema:
+                $ref: '#/components/schemas/identifierType'
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/endpoints:
+    get:
+      description: Get endpoints
+      operationId: getAllEndpoints
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: partnerId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: typeId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          $ref: '#/components/schemas/EndpointRoleType'
+        style: form
+      - explode: true
+        in: query
+        name: deploymentId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: deploymentStatus
+        required: false
+        schema:
+          enum:
+          - ACTIVE
+          - INACTIVE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
+                  name: Source SFTP Local
+                  description: Local Source SFTP for Melora
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  hostCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                  partnerCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                  deployment: null
+                  endpointRole: SEND
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 44
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: mule
+                    path: /BITB
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  partner:
+                    id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                    name: Melora
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate:
+                    id: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    certificateType: PEM
+                    name: Melora 8
+                    csmSecret:
+                      secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      grantResponse:
+                        path: /secret/path
+                        accessGrant: ""
+                    authority: Some Authority
+                    serialNumber: 1234-5678
+                    startDate: 2019-07-23T22:13:52
+                    expires: 2019-07-23T22:13:52
+                    partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                    usedInEndpoints: 1
+                  partnerCertificate:
+                    id: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                    certificateType: PEM
+                    name: Melora 8
+                    csmSecret:
+                      secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      grantResponse:
+                        path: /secret/path
+                        accessGrant: ""
+                    authority: Some Authority
+                    serialNumber: 1234-5678
+                    startDate: 2019-07-23T22:41:00
+                    expires: 2019-07-23T22:41:00
+                    partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    usedInEndpoints: 2
+                - id: ed703a7b-0bc1-4073-81ff-c2379a02cd81
+                  name: Mulesoft SFTP Target
+                  description: Mulesoft Local Target SFTP
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  hostCertificateId: null
+                  partnerCertificateId: null
+                  deployment: null
+                  endpointRole: RECEIVE
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 44
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: mule
+                    path: /B2BTARGET
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  partner:
+                    id: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    name: Mulesoft
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 37aab64f-c3c9-4e7d-b46b-b5a89c12cabf
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate: null
+                  partnerCertificate: null
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                - id: c70bcec4-392c-40d6-a65f-795244934718
+                  name: Mulesoft SFTP Target
+                  description: Mulesoft Local Target SFTP
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  hostCertificateId: null
+                  partnerCertificateId: null
+                  deployment:
+                    id: 63d1aca8-ee5e-4165-adad-9944cb2c919c
+                    status: ACTIVE
+                    name: inbound-sftp-49a1c002-b2fb-46d0-98f6-1f4fcd5522ee
+                    runtimeDeploymentId: 1356
+                    ports: []
+                  endpointRole: RECEIVE
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 2244
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: password
+                    path: /receive
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  partner:
+                    id: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    name: Mulesoft
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 37aab64f-c3c9-4e7d-b46b-b5a89c12cabf
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate: null
+                  partnerCertificate: null
+                - id: 437ae91d-65e3-4dc3-bb7d-fcc5afb0952b
+                  name: Storage API
+                  description: Storage API
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: aa1fd35b-50af-47fe-91bb-48a7ed4ab685
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  hostCertificateId: null
+                  partnerCertificateId: null
+                  deployment:
+                    id: be4e705e-1479-4800-a33a-5c1f5581702f
+                    status: ACTIVE
+                    name: APIReplicationService_d4d3d79e-e594-4137-83dd-351a89d3562a
+                    runtimeDeploymentId: 1354
+                    ports: []
+                  endpointRole: STORAGE_API
+                  endpointType: http
+                  config:
+                    configName: http
+                    serverAddress: localhost
+                    serverPort: 9099
+                    authMode:
+                      authType: NONE
+                      csmSecret: null
+                    protocol: HTTP
+                    path: /
+                    allowedMethods: POST
+                    persistentConnections: false
+                    connectionIdleTimeout: 30000
+                    responseTimeout: 15000
+                    allowStorageApiUIConnection: false
+                    tlsContext: null
+                  partner:
+                    id: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    name: Mulesoft
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 37aab64f-c3c9-4e7d-b46b-b5a89c12cabf
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate: null
+                  partnerCertificate: null
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                - id: 6adba7c8-6d60-4d18-a796-aa0108bd1497
+                  name: Source SFTP Local
+                  description: Local Source SFTP for Melora
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  hostCertificateId: null
+                  partnerCertificateId: null
+                  deployment:
+                    id: 2fa9b11f-47ef-44eb-803d-cb96cbacb3f5
+                    status: ACTIVE
+                    name: outbound-sftp-49a1c002-b2fb-46d0-98f6-1f4fcd5522ee
+                    runtimeDeploymentId: 1355
+                    ports: []
+                  endpointRole: SEND
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 22
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: password
+                    path: /send
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  partner:
+                    id: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                    name: Melora
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 631fee0a-e729-4c3e-8a1c-06c5a403f8c8
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate: null
+                  partnerCertificate: null
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                - id: be4e705e-1479-4800-a33a-5c1f5581702f
+                  name: Mulesoft SFTP ACK
+                  description: Mulesoft ACK SFTP
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  hostCertificateId: null
+                  partnerCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                  deployment:
+                    id: 49a1c002-b2fb-46d0-98f6-1f4fcd5522ee
+                    status: ACTIVE
+                    name: ack-sftp-49a1c002-b2fb-46d0-98f6-1f4fcd5522ee
+                    runtimeDeploymentId: 1359
+                    ports: []
+                  endpointRole: RECEIVE_ACK
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 2244
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: password
+                    path: /ack
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  createdAt: 2019-08-15T17:53:03Z
+                  createdBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  updatedAt: 2019-08-28T20:12:57Z
+                  updatedBy:
+                    userId: e3cdcf59-a2b4-41c3-981e-3311cc833669
+                    firstName: B2b
+                    lastName: Team
+                    userName: b2b-team-dev
+                  partner:
+                    id: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    name: Mulesoft
+                    description: null
+                    websiteUrl: null
+                    status:
+                      id: 37aab64f-c3c9-4e7d-b46b-b5a89c12cabf
+                      startDate: null
+                      endDate: null
+                      status: ACTIVE
+                    environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                    hostFlag: false
+                  hostCertificate: null
+                  partnerCertificate:
+                    id: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                    certificateType: PEM
+                    name: Melora 8
+                    csmSecret:
+                      secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      grantResponse:
+                        path: /secret/path
+                        accessGrant: ""
+                    authority: Some Authority
+                    serialNumber: 1234-5678
+                    startDate: 2019-07-23T22:41:00
+                    expires: 2019-07-23T22:41:00
+                    partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    usedInEndpoints: 2
+                items:
+                  type: object
+                type: array
+    post:
+      description: Create a new endpoint
+      operationId: createEndpoint
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              simpleEndpoint:
+                id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
+                name: Source SFTP Local
+                description: Local Source SFTP for Melora
+                environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                hostCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                partnerCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                deployment: null
+                endpointRole: SEND
+                endpointType: sftp
+                config:
+                  configName: sftp
+                  serverAddress: localhost
+                  serverPort: 44
+                  authMode:
+                    authType: BASIC
+                    csmSecret: null
+                    username: mule
+                    password: mule
+                  path: /BITB
+                  fileAge: 10
+                  pollingFrequency: 5000
+                  sizeCheckWaitTime: 120
+                  movedPath: ""
+                hostCertificate:
+                  id: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                  certificateType: PEM
+                  name: Melora 8
+                  csmSecret:
+                    secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    grantResponse:
+                      path: /secret/path
+                      accessGrant: ""
+                  authority: Some Authority
+                  serialNumber: 1234-5678
+                  startDate: 2019-07-23T22:13:52
+                  expires: 2019-07-23T22:13:52
+                  partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  usedInEndpoints: 1
+                partnerCertificate:
+                  id: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                  certificateType: PEM
+                  name: Melora 8
+                  csmSecret:
+                    secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    grantResponse:
+                      path: /secret/path
+                      accessGrant: ""
+                  authority: Some Authority
+                  serialNumber: 1234-5678
+                  startDate: 2019-07-23T22:41:00
+                  expires: 2019-07-23T22:41:00
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  usedInEndpoints: 2
+            schema:
+              $ref: '#/components/schemas/Endpoint'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: returns id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/endpoints/{endpointId}:
+    delete:
+      description: Delete endpoint
+      operationId: deleteEndpoint
+      parameters:
+      - explode: false
+        in: path
+        name: endpointId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Endpoint
+      operationId: getEndpoint
+      parameters:
+      - explode: false
+        in: path
+        name: endpointId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                simpleEndpoint:
+                  id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
+                  name: Source SFTP Local
+                  description: Local Source SFTP for Melora
+                  environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  hostCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                  partnerCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                  deployment: null
+                  endpointRole: SEND
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 44
+                    authMode:
+                      authType: BASIC
+                      csmSecret: null
+                      username: mule
+                      password: mule
+                    path: /BITB
+                    fileAge: 10
+                    pollingFrequency: 5000
+                    sizeCheckWaitTime: 120
+                    movedPath: ""
+                  hostCertificate:
+                    id: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    certificateType: PEM
+                    name: Melora 8
+                    csmSecret:
+                      secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      grantResponse:
+                        path: /secret/path
+                        accessGrant: ""
+                    authority: Some Authority
+                    serialNumber: 1234-5678
+                    startDate: 2019-07-23T22:13:52
+                    expires: 2019-07-23T22:13:52
+                    partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                    usedInEndpoints: 1
+                  partnerCertificate:
+                    id: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                    certificateType: PEM
+                    name: Melora 8
+                    csmSecret:
+                      secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                      grantResponse:
+                        path: /secret/path
+                        accessGrant: ""
+                    authority: Some Authority
+                    serialNumber: 1234-5678
+                    startDate: 2019-07-23T22:41:00
+                    expires: 2019-07-23T22:41:00
+                    partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                    usedInEndpoints: 2
+              schema:
+                $ref: '#/components/schemas/Endpoint'
+        "404": {}
+        "500": {}
+    put:
+      description: Replace endpoint
+      operationId: replaceEndpoint
+      parameters:
+      - explode: false
+        in: path
+        name: endpointId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              simpleEndpoint:
+                id: 6fc31df9-52ff-40f9-93ff-c9b7f7394cd4
+                name: Source SFTP Local
+                description: Local Source SFTP for Melora
+                environmentId: 00c8540b-80c1-4fe6-96c3-643c284962c9
+                endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                hostCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                partnerCertificateId: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                deployment: null
+                endpointRole: SEND
+                endpointType: sftp
+                config:
+                  configName: sftp
+                  serverAddress: localhost
+                  serverPort: 44
+                  authMode:
+                    authType: BASIC
+                    csmSecret: null
+                    username: mule
+                    password: mule
+                  path: /BITB
+                  fileAge: 10
+                  pollingFrequency: 5000
+                  sizeCheckWaitTime: 120
+                  movedPath: ""
+                hostCertificate:
+                  id: 2ff1bc8a-821f-ec53-a2a6-7721ef972397
+                  certificateType: PEM
+                  name: Melora 8
+                  csmSecret:
+                    secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    grantResponse:
+                      path: /secret/path
+                      accessGrant: ""
+                  authority: Some Authority
+                  serialNumber: 1234-5678
+                  startDate: 2019-07-23T22:13:52
+                  expires: 2019-07-23T22:13:52
+                  partnerId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                  usedInEndpoints: 1
+                partnerCertificate:
+                  id: 2ff1bc8a-821f-ec53-a2a6-7721ef972398
+                  certificateType: PEM
+                  name: Melora 8
+                  csmSecret:
+                    secretId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    secretGroupId: 1ff1bc8a-821f-ec53-a2a6-7721ef972397
+                    grantResponse:
+                      path: /secret/path
+                      accessGrant: ""
+                  authority: Some Authority
+                  serialNumber: 1234-5678
+                  startDate: 2019-07-23T22:41:00
+                  expires: 2019-07-23T22:41:00
+                  partnerId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                  usedInEndpoints: 2
+            schema:
+              $ref: '#/components/schemas/Endpoint'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/ediFormats:
+    get:
+      description: Get all ediFormats
+      operationId: getAllEdiFormats
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                - id: 25c1bc8a-801f-4337-a2a6-7721ef971460
+                  formatType: X12
+                  description: X12 format type
+                  label: X12 Document
+                items:
+                  $ref: '#/components/schemas/ediFormat'
+                type: array
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/ediFormats/{format}:
+    get:
+      description: Get ediFormats
+      operationId: getEdiFormat
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          $ref: '#/components/schemas/ediFormatTypes'
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 25c1bc8a-801f-4337-a2a6-7721ef971460
+                formatType: X12
+                description: X12 format type
+                label: X12 Document
+              schema:
+                $ref: '#/components/schemas/ediFormat'
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/ediFormats/{format}/ediFormatVersions:
+    get:
+      description: Get all ediFormatVersions
+      operationId: getAllEdiFormatVersions
+      parameters:
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          $ref: '#/components/schemas/ediFormatTypes'
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 7f9d1dcc-6262-43b8-8990-26a4f2787aec
+                formatType: X12
+                version: v003010
+                description: X12 v.3010
+                label: "3010"
+              - id: 095c7c8d-5279-4fb9-98a6-80fc80878619
+                formatType: X12
+                version: v003020
+                description: X12 v.3020
+                label: "3020"
+              schema:
+                items:
+                  $ref: '#/components/schemas/ediFormatVersion'
+                type: array
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/ediFormats/{format}/ediFormatVersions/{versionId}:
+    get:
+      description: Get ediFormatVersions
+      operationId: getEdiFormatVersion
+      parameters:
+      - explode: false
+        in: path
+        name: versionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          $ref: '#/components/schemas/ediFormatTypes'
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 7f9d1dcc-6262-43b8-8990-26a4f2787aec
+                formatType: X12
+                version: v003010
+                description: X12 v.3010
+                label: "3010"
+              schema:
+                $ref: '#/components/schemas/ediFormatVersion'
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/ediFormats/{format}/ediFormatVersions/{versionId}/ediDocumentTypes:
+    get:
+      description: Get all ediDocumentTypes
+      operationId: getAllEdiDocumentTypes
+      parameters:
+      - explode: false
+        in: path
+        name: versionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: format
+        required: true
+        schema:
+          $ref: '#/components/schemas/ediFormatTypes'
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 6117a01c-d661-4517-80a5-5a6fe08d833c
+                documentName: "810"
+                label: "810"
+                schemaPath: /schemas/x12/3010/810.esl
+                description: ""
+                formatType: JSON
+                version: ""
+              schema:
+                items:
+                  $ref: '#/components/schemas/ediDocumentType'
+                type: array
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/documentflows:
+    get:
+      description: Get all documents
+      operationId: getAllDocumentflows
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: searchString
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The page to be fetched
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: Limit the elements to be fetched a page
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          headers:
+            X-TotalRecordCount:
+              description: the count of total elements in the query
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-TotalPages:
+              description: The count of total pages in the query
+              explode: false
+              schema:
+                type: integer
+              style: simple
+    post:
+      description: Create a new documentflow
+      operationId: createDocumentflow
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 711b87b1-5e79-44c9-85dd-5d50fd6e0297
+              name: 850 X12 From Melora
+              direction: INBOUND
+              partnerFromId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+              partnerToId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+              configurations: []
+              lastDeployStatus: FAIL
+              lastDeployMessage: message example
+            schema:
+              $ref: '#/components/schemas/documentFlow'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/documentflows/{documentflowId}:
+    delete:
+      description: Delete documentflow
+      operationId: deleteDocumentflow
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Documentflow
+      operationId: getDocumentflow
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 711b87b1-5e79-44c9-85dd-5d50fd6e0297
+                name: 850 X12 From Melora
+                direction: INBOUND
+                partnerFromId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+                partnerToId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+                configurations: []
+                lastDeployStatus: FAIL
+                lastDeployMessage: message example
+              schema:
+                $ref: '#/components/schemas/documentFlow'
+        "404": {}
+        "500": {}
+    patch:
+      description: Patches documentflow
+      operationId: updateDocumentflow
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 711b87b1-5e79-44c9-85dd-5d50fd6e0297
+              name: 850 X12 From Melora
+              direction: INBOUND
+              partnerFromId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+              partnerToId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+              configurations: []
+              lastDeployStatus: FAIL
+              lastDeployMessage: message example
+            schema:
+              $ref: '#/components/schemas/documentFlow'
+        required: true
+      responses:
+        "200": {}
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+    put:
+      description: Replace documentflow
+      operationId: replaceDocumentflow
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 711b87b1-5e79-44c9-85dd-5d50fd6e0297
+              name: 850 X12 From Melora
+              direction: INBOUND
+              partnerFromId: fb993e92-a0c3-4d56-b321-b2c382e53f14
+              partnerToId: c3ca131d-d625-43d1-aa2b-3bea050f5e5b
+              configurations: []
+              lastDeployStatus: FAIL
+              lastDeployMessage: message example
+            schema:
+              $ref: '#/components/schemas/documentFlow'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/documentflows/{documentflowId}/mappings:
+    get:
+      description: Get all mappings
+      operationId: getAllMappings
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: b2621865-10e1-49b1-9d9e-a8db666fdc0e
+                mappingType: DWL_FILE
+                mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJQT19OdW1iZXIiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA1MDEwWyc4NTAnXS5IZWFkaW5nLiIwMjAwX0JFRyIuIkJFRzAzIlswXSwNCgkiUE9fQW1vdW50IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uU3VtbWFyeS4iMDEwX0NUVF9Mb29wIi4iMDEwMF9DVFQiLiJDVFQwMiJbMF0sDQoJIkN1cnJlbmN5IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uSGVhZGluZy4iMDQwMF9DVVIiLiJDVVIwMiJbMF0sDQoJIkl0ZW1zIjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uRGV0YWlsLiIwMTAwX1BPMV9Mb29wIiBtYXAgewkJDQoJCSJMaW5lX051bWJlciI6JC4nMDEwMF9QTzEnLlBPMTAxWzBdLA0KCQkiRGVzY3JpcHRpb24iOiAkLicwMTAwX1BPMScuUE8xMDdbMF0sDQoJCSJRdWFudGl0eSI6JC4nMDEwMF9QTzEnLlBPMTAyWzBdLA0KCQkiVU9NIjokLicwMTAwX1BPMScuUE8xMDNbMF0sDQoJCSJVbml0X1ByaWNlIjokLicwMTAwX1BPMScuUE8xMDRbMF0sDQoJCSJBbW91bnQiOiQuJzAxMDBfUE8xJy5QTzEwMlswXSokLicwMTAwX1BPMScuUE8xMDRbMF0NCgkJfQ0KfQ==
+                mappingSourceRef: fileName.dsl
+              schema:
+                items:
+                  $ref: '#/components/schemas/documentMappingConfig'
+                type: array
+    post:
+      description: Create a new mapping
+      operationId: createMapping
+      parameters:
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: b2621865-10e1-49b1-9d9e-a8db666fdc0e
+              mappingType: DWL_FILE
+              mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJQT19OdW1iZXIiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA1MDEwWyc4NTAnXS5IZWFkaW5nLiIwMjAwX0JFRyIuIkJFRzAzIlswXSwNCgkiUE9fQW1vdW50IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uU3VtbWFyeS4iMDEwX0NUVF9Mb29wIi4iMDEwMF9DVFQiLiJDVFQwMiJbMF0sDQoJIkN1cnJlbmN5IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uSGVhZGluZy4iMDQwMF9DVVIiLiJDVVIwMiJbMF0sDQoJIkl0ZW1zIjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uRGV0YWlsLiIwMTAwX1BPMV9Mb29wIiBtYXAgewkJDQoJCSJMaW5lX051bWJlciI6JC4nMDEwMF9QTzEnLlBPMTAxWzBdLA0KCQkiRGVzY3JpcHRpb24iOiAkLicwMTAwX1BPMScuUE8xMDdbMF0sDQoJCSJRdWFudGl0eSI6JC4nMDEwMF9QTzEnLlBPMTAyWzBdLA0KCQkiVU9NIjokLicwMTAwX1BPMScuUE8xMDNbMF0sDQoJCSJVbml0X1ByaWNlIjokLicwMTAwX1BPMScuUE8xMDRbMF0sDQoJCSJBbW91bnQiOiQuJzAxMDBfUE8xJy5QTzEwMlswXSokLicwMTAwX1BPMScuUE8xMDRbMF0NCgkJfQ0KfQ==
+              mappingSourceRef: fileName.dsl
+            schema:
+              $ref: '#/components/schemas/documentMappingConfig'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: Response of POST requests returning new entity id
+        "400": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/documentflows/{documentflowId}/mappings/{mappingsId}:
+    delete:
+      description: Delete mapping
+      operationId: deleteMapping
+      parameters:
+      - explode: false
+        in: path
+        name: mappingsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+    get:
+      description: Get Mapping
+      operationId: getMapping
+      parameters:
+      - explode: false
+        in: path
+        name: mappingsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: b2621865-10e1-49b1-9d9e-a8db666fdc0e
+                mappingType: DWL_FILE
+                mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJQT19OdW1iZXIiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA1MDEwWyc4NTAnXS5IZWFkaW5nLiIwMjAwX0JFRyIuIkJFRzAzIlswXSwNCgkiUE9fQW1vdW50IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uU3VtbWFyeS4iMDEwX0NUVF9Mb29wIi4iMDEwMF9DVFQiLiJDVFQwMiJbMF0sDQoJIkN1cnJlbmN5IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uSGVhZGluZy4iMDQwMF9DVVIiLiJDVVIwMiJbMF0sDQoJIkl0ZW1zIjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uRGV0YWlsLiIwMTAwX1BPMV9Mb29wIiBtYXAgewkJDQoJCSJMaW5lX051bWJlciI6JC4nMDEwMF9QTzEnLlBPMTAxWzBdLA0KCQkiRGVzY3JpcHRpb24iOiAkLicwMTAwX1BPMScuUE8xMDdbMF0sDQoJCSJRdWFudGl0eSI6JC4nMDEwMF9QTzEnLlBPMTAyWzBdLA0KCQkiVU9NIjokLicwMTAwX1BPMScuUE8xMDNbMF0sDQoJCSJVbml0X1ByaWNlIjokLicwMTAwX1BPMScuUE8xMDRbMF0sDQoJCSJBbW91bnQiOiQuJzAxMDBfUE8xJy5QTzEwMlswXSokLicwMTAwX1BPMScuUE8xMDRbMF0NCgkJfQ0KfQ==
+                mappingSourceRef: fileName.dsl
+              schema:
+                $ref: '#/components/schemas/documentMappingConfig'
+        "404": {}
+        "500": {}
+    put:
+      description: Replace mapping
+      operationId: replaceMapping
+      parameters:
+      - explode: false
+        in: path
+        name: mappingsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: documentflowId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: b2621865-10e1-49b1-9d9e-a8db666fdc0e
+              mappingType: DWL_FILE
+              mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJQT19OdW1iZXIiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA1MDEwWyc4NTAnXS5IZWFkaW5nLiIwMjAwX0JFRyIuIkJFRzAzIlswXSwNCgkiUE9fQW1vdW50IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uU3VtbWFyeS4iMDEwX0NUVF9Mb29wIi4iMDEwMF9DVFQiLiJDVFQwMiJbMF0sDQoJIkN1cnJlbmN5IjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uSGVhZGluZy4iMDQwMF9DVVIiLiJDVVIwMiJbMF0sDQoJIkl0ZW1zIjogcGF5bG9hZC5UcmFuc2FjdGlvblNldHMudjAwNTAxMFsnODUwJ10uRGV0YWlsLiIwMTAwX1BPMV9Mb29wIiBtYXAgewkJDQoJCSJMaW5lX051bWJlciI6JC4nMDEwMF9QTzEnLlBPMTAxWzBdLA0KCQkiRGVzY3JpcHRpb24iOiAkLicwMTAwX1BPMScuUE8xMDdbMF0sDQoJCSJRdWFudGl0eSI6JC4nMDEwMF9QTzEnLlBPMTAyWzBdLA0KCQkiVU9NIjokLicwMTAwX1BPMScuUE8xMDNbMF0sDQoJCSJVbml0X1ByaWNlIjokLicwMTAwX1BPMScuUE8xMDRbMF0sDQoJCSJBbW91bnQiOiQuJzAxMDBfUE8xJy5QTzEwMlswXSokLicwMTAwX1BPMScuUE8xMDRbMF0NCgkJfQ0KfQ==
+              mappingSourceRef: fileName.dsl
+            schema:
+              $ref: '#/components/schemas/documentMappingConfig'
+        required: true
+      responses:
+        "204": {}
+        "400": {}
+        "404": {}
+        "500": {}
+  /organizations/{organizationId}/environments/{environmentId}/deployments:
+    get:
+      description: Get Deployment configurations
+      operationId: getDeploymentConfigurations
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: fromPartner
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: toPartner
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: formatType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: formatVersion
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: docType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: receivingEndpointId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          default: ACTIVE
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 73fa7761-43c3-4d52-88c3-890e1b64b8aa
+                name: X12-v004050-100
+                status: ACTIVE
+                configId: 84f1d635-7787-4309-92f9-434fc44fc2aa
+                direction: INBOUND
+                version: 20
+                partnerToId: f01227a5-5878-4440-bd4b-111963693d26
+                partnerFromId: 9b57e6c3-4a84-4ed9-9153-12dbf8acc060
+                preProcessingEndpoint: null
+                receivingEndpoint:
+                  id: 0ea9f199-79af-4e36-a7f7-e738349b96fb
+                  name: SFTPRECEIVE
+                  description: sftp
+                  environmentId: 73c2911c-3959-4755-8707-3f8b9d0b7e42
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: 9b57e6c3-4a84-4ed9-9153-12dbf8acc060
+                  deployment:
+                    id: d3058907-fff9-49f0-9bc2-9097f75236ac
+                    status: ACTIVE
+                    name: inbound-sftp-48466d55-adb6-43dc-853a-9ae9eededcfc
+                    runtimeDeploymentId: 1030
+                    port: 19090
+                  endpointRole: RECEIVE
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 22
+                    authMode:
+                      authType: BASIC
+                      csmSecret:
+                        secretId: 6584ec3e-90c3-4b1b-9f45-76a1d22fc560
+                        secretGroupId: 6e128fa8-dba2-416e-a0fb-4773c3bbe729
+                        grantResponse:
+                          path: sharedSecrets/6584ec3e-90c3-4b1b-9f45-76a1d22fc560
+                          accessGrant: QWNjZXNzSWQ9SWVQYVFKRnkyTG9zNHE3UFBBdnFFcWt2QiZFeHBpcmVzPTI1MzgxNTj3MDAmU2lnbmF0dXJlPXZhdWx0OnYxOldnSlg0NFk1c1Z1NTVzeGxETkpEQ2hOQ0NWazIveDRpZ2U3T1hKalRNYzBVZTV0TU1JeWZmSHNLbHp2WXJWenZ0N3RpdWVyNW9zUW94RHlLRGRreEF3PT0=
+                        jsonDetails: null
+                      username: userExample
+                      password: 6584ec3e-90c3-4b1b-9f45-76a1d22f0000
+                    path: /sftpuser/SFTP
+                    fileAge: 1
+                    pollingFrequency: 100
+                    sizeCheckWaitTime: 1
+                    movedPath: null
+                receivingAckEndpoint: null
+                targetEndpoint:
+                  id: 62169839-fad7-4a9a-978f-dd4c3c4030a6
+                  name: SFTPSEND
+                  description: sftp
+                  environmentId: 73c2911c-3959-4755-8707-3f8b9d0b7e42
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: f01227a5-5878-4440-bd4b-111963693d26
+                  deployment:
+                    id: 66966155-f0c9-49fa-8353-3cb98c5a2fce
+                    status: ACTIVE
+                    name: outbound-sftp-48466d55-adb6-43dc-853a-9ae9eededcfc
+                    runtimeDeploymentId: 1029
+                    port: 19090
+                  endpointRole: SEND
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 22
+                    authMode:
+                      authType: BASIC
+                      csmSecret:
+                        secretId: 9132af99-f438-46a2-804a-b1f8b39ec8bb
+                        secretGroupId: 6e128fa8-dba2-416e-a0fb-4773c3bbe729
+                        grantResponse:
+                          path: sharedSecrets/9132af99-f438-46a2-804a-b1f8b39ec8bb
+                          accessGrant: QWNjZXNzSWQ9SWVQYVFKRnkyTG9zNHE3UFBBdnFFcWt2QiZFeHBpcmVzPTI1MzgxNTj3MDAmU2lnbmF0dXJlPXZhdWx0OnYxOldnSlg0NFk1c1Z1NTVzeGxETkpEQ2hOQ0NWazIveDRpZ2U3T1hKalRNYzBVZTV0TU1JeWZmSHNLbHp2WXJWenZ0N3RpdWVyNW9zUW94RHlLRGRreEF3PT0=
+                        jsonDetails: null
+                      username: userExample
+                      password: 9132af99-f438-46a2-804a-b1f8b39e0000
+                    path: /sftpuser/SFTP/received
+                    fileAge: 1
+                    pollingFrequency: 1
+                    sizeCheckWaitTime: 1
+                    movedPath: null
+                sourceDocType:
+                  id: faf5a97a-49cc-4d33-a81f-889da48f29c4
+                  name: X12-v004050-100
+                  isStandard: true
+                  ediDocumentTypeId: c88d57be-1f5b-4078-baa4-690b6845290e
+                  baseType:
+                    id: c88d57be-1f5b-4078-baa4-690b6845290e
+                    documentName: "100"
+                    label: "100"
+                    schemaPath: /schemas/x12/4050/100.esl
+                    description: ""
+                    formatType: X12
+                    version: v004050
+                targetDocType:
+                  id: 858fb257-0d81-47e4-9017-ebc31f87adce
+                  name: JSON-V1-JSON
+                  isStandard: true
+                  ediDocumentTypeId: 64c8a31b-5748-49d4-9193-55ba3e6cd99b
+                  baseType:
+                    id: 64c8a31b-5748-49d4-9193-55ba3e6cd99b
+                    documentName: JSON
+                    label: JSON
+                    schemaPath: ""
+                    description: JSONSchema
+                    formatType: JSON
+                    version: V1
+                documentMapping:
+                - id: 28019ccd-303b-4b71-b649-cef58a58740b
+                  mappingType: DWL_FILE
+                  mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJPYmplY3QiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA0MDUwWyc4MjAnXQ0KfQ0K
+                  mappingSourceRef: 820_v004050_to_Json.dwl
+                comment: Updated
+                messageStatus: ""
+                receivingAckConfig:
+                  ackConfigType: X12
+                  require997: true
+                  generate999: true
+              schema:
+                items:
+                  $ref: '#/components/schemas/documentFlowConfigInstance'
+                type: array
+    post:
+      description: Creates new Deployment config
+      operationId: createDeploymentConfiguration
+      parameters:
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              documentFlowId: d5780753-9db3-4517-b0d7-1d13fbf93c2b
+              comment: example comment
+            schema:
+              $ref: '#/components/schemas/DeploymentPostRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                id: f4ace7b9-6da1-4322-8852-823532633c18
+                message: ""
+              schema:
+                $ref: '#/components/schemas/CreateEntityResponse'
+  /organizations/{organizationId}/environments/{environmentId}/deployments/{deploymentId}:
+    get:
+      description: Get deployments
+      operationId: getDeployment
+      parameters:
+      - explode: false
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 73fa7761-43c3-4d52-88c3-890e1b64b8aa
+                name: X12-v004050-100
+                status: ACTIVE
+                configId: 84f1d635-7787-4309-92f9-434fc44fc2aa
+                direction: INBOUND
+                version: 20
+                partnerToId: f01227a5-5878-4440-bd4b-111963693d26
+                partnerFromId: 9b57e6c3-4a84-4ed9-9153-12dbf8acc060
+                preProcessingEndpoint: null
+                receivingEndpoint:
+                  id: 0ea9f199-79af-4e36-a7f7-e738349b96fb
+                  name: SFTPRECEIVE
+                  description: sftp
+                  environmentId: 73c2911c-3959-4755-8707-3f8b9d0b7e42
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: 9b57e6c3-4a84-4ed9-9153-12dbf8acc060
+                  deployment:
+                    id: d3058907-fff9-49f0-9bc2-9097f75236ac
+                    status: ACTIVE
+                    name: inbound-sftp-48466d55-adb6-43dc-853a-9ae9eededcfc
+                    runtimeDeploymentId: 1030
+                    port: 19090
+                  endpointRole: RECEIVE
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 22
+                    authMode:
+                      authType: BASIC
+                      csmSecret:
+                        secretId: 6584ec3e-90c3-4b1b-9f45-76a1d22fc560
+                        secretGroupId: 6e128fa8-dba2-416e-a0fb-4773c3bbe729
+                        grantResponse:
+                          path: sharedSecrets/6584ec3e-90c3-4b1b-9f45-76a1d22fc560
+                          accessGrant: QWNjZXNzSWQ9SWVQYVFKRnkyTG9zNHE3UFBBdnFFcWt2QiZFeHBpcmVzPTI1MzgxNTk1MDAmU2lnbmF0dXJlPXZhdWx0OnYxOldnSlg0NFk1c1Z1NTVzeGxETkpEQ2hOQ0NWazIveDRpZ2U3T1hKalRNYzBVZTV0TU1JeWZmSHNLbHp2WXJWenZ0N3RpdWVyNW9zUW94RHlLRGRreEF3PT0=
+                        jsonDetails: ""
+                      username: userExample
+                      password: 6584ec3e-90c3-4b1b-9f45-76a1d22f0000
+                    path: /sftpuser/SFTP
+                    fileAge: 1
+                    pollingFrequency: 100
+                    sizeCheckWaitTime: 1
+                    movedPath: ""
+                receivingAckEndpoint: null
+                targetEndpoint:
+                  id: 62169839-fad7-4a9a-978f-dd4c3c4030a6
+                  name: SFTPSEND
+                  description: sftp
+                  environmentId: 73c2911c-3959-4755-8707-3f8b9d0b7e42
+                  endpointTypeId: 3bcc65e5-040b-47eb-8fc7-27c89225f1bc
+                  partnerId: f01227a5-5878-4440-bd4b-111963693d26
+                  deployment:
+                    id: 66966155-f0c9-49fa-8353-3cb98c5a2fce
+                    status: ACTIVE
+                    name: outbound-sftp-48466d55-adb6-43dc-853a-9ae9eededcfc
+                    runtimeDeploymentId: 1029
+                    port: 19090
+                  endpointRole: SEND
+                  endpointType: sftp
+                  config:
+                    configName: sftp
+                    serverAddress: localhost
+                    serverPort: 22
+                    authMode:
+                      authType: BASIC
+                      csmSecret:
+                        secretId: 9132af99-f438-46a2-804a-b1f8b39ec8bb
+                        secretGroupId: 6e128fa8-dba2-416e-a0fb-4773c3bbe729
+                        grantResponse:
+                          path: sharedSecrets/9132af99-f438-46a2-804a-b1f8b39ec8bb
+                          accessGrant: QWNjZXNzSWQ9a3ZoYmFzbTBWMkNleHBPOEhPZGhyOEk3OSZFeHBpcmVzPTI1MzgxNTk1MDAmU2lnbmF0dXJlPXZhdWx0OnYxOkNBcVRhMVdVRlQ0YnBHVm41Sm90MCtXOFB3Vk9MdkZ1M01OWUNjZnBaVWZXc3JlVyt4MlUwRTV5d2JlNFpqRXJKck5iZ3BOM2MvNmJ6MkJZZkF3MUR3PT0=
+                        jsonDetails: ""
+                      username: userExample
+                      password: 9132af99-f438-46a2-804a-b1f8b39e0000
+                    path: /sftpuser/SFTP/received
+                    fileAge: 1
+                    pollingFrequency: 1
+                    sizeCheckWaitTime: 1
+                    movedPath: ""
+                sourceDocType:
+                  id: faf5a97a-49cc-4d33-a81f-889da48f29c4
+                  name: X12-v004050-100
+                  isStandard: true
+                  ediDocumentTypeId: c88d57be-1f5b-4078-baa4-690b6845290e
+                  baseType:
+                    id: c88d57be-1f5b-4078-baa4-690b6845290e
+                    documentName: "100"
+                    label: "100"
+                    schemaPath: /schemas/x12/4050/100.esl
+                    description: ""
+                    formatType: X12
+                    version: v004050
+                targetDocType:
+                  id: 858fb257-0d81-47e4-9017-ebc31f87adce
+                  name: JSON-V1-JSON
+                  isStandard: true
+                  ediDocumentTypeId: 64c8a31b-5748-49d4-9193-55ba3e6cd99b
+                  baseType:
+                    id: 64c8a31b-5748-49d4-9193-55ba3e6cd99b
+                    documentName: JSON
+                    label: JSON
+                    schemaPath: ""
+                    description: JSONSchema
+                    formatType: JSON
+                    version: V1
+                documentMapping:
+                - id: 28019ccd-303b-4b71-b649-cef58a58740b
+                  mappingType: DWL_FILE
+                  mappingContent: data:application/octet-stream;base64,JWR3IDIuMA0Kb3V0cHV0IGFwcGxpY2F0aW9uL2pzb24NCi0tLQ0Kew0KCSJPYmplY3QiOiBwYXlsb2FkLlRyYW5zYWN0aW9uU2V0cy52MDA0MDUwWyc4MjAnXQ0KfQ0K
+                  mappingSourceRef: 820_v004050_to_Json.dwl
+                comment: Updated
+                messageStatus: ""
+                receivingAckConfig:
+                  ackConfigType: X12
+                  require997: true
+                  generate999: true
+              schema:
+                $ref: '#/components/schemas/documentFlowConfigInstance'
+        "404": {}
+        "500": {}
+components:
+  callbacks: {}
+  examples:
+    X12Configuration:
+      summary: A default X12 Configuration example
+      value:
+        envelopeHeaders:
+          authInfoQualifierISA01: "00"
+          authInfoISA02: ""
+          securityInfoQualifierISA03: "00"
+          securityInfoISA04: ""
+          interchangeReceiverIdQualifierISA07: "01"
+          interchangeReceiverIdISA07: ""
+          repetitionSeparatorCharacterISA11: ^
+          repetitionInterchangeAcknowledmentsISA14: null
+          defaultInterchangeUsageIndicatorISA15: Production
+          componentElementSeparator: null
+          interchangeControlVersionNumberISA12: null
+          interchangeControlStandardsIdentifierISA11: U
+          responsibleAgencyCodeGS07: X
+          releaseNumberGS08: null
+          implementationConventionReferenceST03: null
+        parserSettings:
+          failDocumentWhenValueLengthOutsideAllowedRange: true
+          failDocumentWhenInvalidCharacterInValue: true
+          failDocumentIfValueIsRepeatedTooManyTimes: true
+          failDocumentIfUnknownSegmentsAreUsed: false
+          failDocumentWhenSegmentsAreOutOfOrder: true
+          failDocumentWhenTooManyRepeatsOfSegment: true
+          failDocumentWhenUnusedSegmentsAreIncluded: false
+          require997: false
+          generate999: false
+          generateTA1: false
+          checkDuplicateDays: 300
+          enforceConditionalRulesOnParser: false
+          enforceCodeSetValidationsParse: false
+          acknowledgeEveryTransaction: false
+        characterSetAndEncoding:
+          characterSet: EXTENDED
+          characterEncoding: PLATFORM
+          lineEndingBetweenSegments: NONE
+          componentElementSeparatorISA16: '>'
+          writeUseCRLFLastLine: null
+        controlNumberSettings:
+          initialInterchangeControlNumber: ""
+          initialGSControlNumber: ""
+          initialTransactionSetControlNumber: ""
+          requireUniqueGSControlNumbers: null
+          requireUniqueTransactionSetControlNumber: null
+          requireUniqueISAcontrolNumbersISA13: true
+          requireUniqueGSControlNumbersGS06: false
+          requireUniqueTransactionSetControlNumbersST02: false
+        id: 25c1bc8a-801f-4337-a2a6-7721ef971465
+        configType: READ
+        formatType: X12InboundConfig
+        formatTypeId: 25c1bc8a-801f-4337-a2a6-7721ef971460
+        partnerId: null
+        ackEndpointId: null
+        configId: null
+  headers: {}
+  links: {}
+  parameters:
+    environmentId:
+      explode: false
+      in: path
+      name: environmentId
+      required: true
+      schema:
+        type: string
+      style: simple
+    organizationId:
+      explode: false
+      in: path
+      name: organizationId
+      required: true
+      schema:
+        type: string
+      style: simple
+    trait_isPageable_page:
+      description: The page to be fetched
+      explode: true
+      in: query
+      name: page
+      required: false
+      schema:
+        default: 1
+        type: integer
+      style: form
+    trait_isPageable_pageSize:
+      description: Limit the elements to be fetched a page
+      explode: true
+      in: query
+      name: pageSize
+      required: false
+      schema:
+        default: 100
+        type: integer
+      style: form
+  requestBodies:
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+  responses:
+    trait_isPageable_200:
+      headers:
+        X-TotalRecordCount:
+          description: the count of total elements in the query
+          explode: false
+          schema:
+            type: integer
+          style: simple
+        X-TotalPages:
+          description: The count of total pages in the query
+          explode: false
+          schema:
+            type: integer
+          style: simple
+    POST_ID_Response:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_202'
+      description: Response of POST requests returning new entity id
+  schemas:
+    b2bEntity:
+      description: Base B2B Entity type
+      title: B2BEntity
+      type: object
+    BaseAckConfig:
+      description: This is used to enhance message flows with individual acknowledgement
+        configs.
+      discriminator:
+        propertyName: ackConfigType
+      example:
+        ackConfigType: ackConfigType
+      properties:
+        ackConfigType:
+          type: string
+      required:
+      - ackConfigType
+      title: BaseAckConfig
+      type: object
+    AckConfigX12:
+      allOf:
+      - $ref: '#/components/schemas/BaseAckConfig'
+      - $ref: '#/components/schemas/AckConfigX12_allOf'
+      title: AckConfigX12
+    CreateEntityResponse:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/CreateEntityResponse_allOf'
+      description: Create Entity Response
+      title: CreateEntityResponse
+    UserDetail:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/UserDetail_allOf'
+      description: User details from core services
+      title: UserDetail
+    address:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/address_allOf'
+      description: Address Type
+      title: Address
+    contact:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/contact_allOf'
+      description: Contact Type
+      title: Contact
+    contactType:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/contactType_allOf'
+      description: Contact Type
+      title: ContactType
+    identifier:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/identifier_allOf'
+      description: Identifier Type
+      title: Identifier
+    identifierType:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/identifierType_allOf'
+      description: Identifier Types
+      title: IdentifierType
+    identifierTypeQualifier:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/identifierTypeQualifier_allOf'
+      description: Identifier Type Qualifiers
+      title: IdentifierTypeQualifier
+    customAttribute:
+      description: Custom Attribute
+      example:
+        alias: alias
+        id: id
+        label: label
+        searchable: true
+      properties:
+        id:
+          type: string
+        searchable:
+          type: boolean
+        label:
+          type: string
+        alias:
+          type: string
+      required:
+      - alias
+      - label
+      - searchable
+      title: Custom Attribute
+    partnerprofile:
+      description: Partner Profile Type
+      example:
+        environmentId: environmentId
+        identifiers:
+        - value: value
+          identifierTypeQualifierId: identifierTypeQualifierId
+          status: status
+        - value: value
+          identifierTypeQualifierId: identifierTypeQualifierId
+          status: status
+        name: name
+        partnerType: partnerType
+      properties:
+        partnerType:
+          type: string
+        environmentId:
+          type: string
+        name:
+          type: string
+        identifiers:
+          items:
+            $ref: '#/components/schemas/partnerprofileidentifier'
+          type: array
+      required:
+      - environmentId
+      - identifiers
+      - name
+      - partnerType
+      title: Partner Profile
+    partnerprofileidentifier:
+      description: Partner Profile Identifier Type
+      example:
+        value: value
+        identifierTypeQualifierId: identifierTypeQualifierId
+        status: status
+      properties:
+        value:
+          type: string
+        identifierTypeQualifierId:
+          type: string
+        status:
+          type: string
+      required:
+      - identifierTypeQualifierId
+      - status
+      - value
+      title: Partner Profile Identifier
+    partner:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/partner_allOf'
+      description: Partner Type
+      title: Partner
+    partnerProfile:
+      allOf:
+      - $ref: '#/components/schemas/partner'
+      - $ref: '#/components/schemas/partnerProfile_allOf'
+      description: Partner Profile Type
+      title: PartnerProfile
+    UsedInDeployments:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/UsedInDeployments_allOf'
+      description: Type of usedInDeployments
+      title: UsedInDeployments
+    timedStatus:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/timedStatus_allOf'
+      description: Timed Status for Partner or Document Flow
+      title: TimedStatus
+    codeKeyVal:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      title: CodeKeyValue
+      type: object
+    groupCode:
+      properties:
+        groupCode:
+          type: string
+        codes:
+          items:
+            items:
+              $ref: '#/components/schemas/codeKeyVal'
+            type: array
+          type: array
+      required:
+      - codes
+      - groupCode
+      title: Code Group
+      type: object
+    apiKey:
+      properties:
+        keyId:
+          type: string
+        keyValue:
+          type: string
+      required:
+      - keyId
+      - keyValue
+      title: API Key
+      type: object
+    httpResponseMessage:
+      properties:
+        errorCode:
+          type: number
+        message:
+          type: string
+      required:
+      - errorCode
+      - message
+      title: HTTP Response Message
+      type: object
+    logo:
+      properties:
+        content:
+          type: string
+      required:
+      - content
+      title: Logo
+      type: object
+    documentFlow:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/documentFlow_allOf'
+      title: Document Flow
+    documentFlowConfig:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/documentFlowConfig_allOf'
+      title: Document Flow Configuration
+    PartnerIdentifiersConfigIdentifiers:
+      properties:
+        id:
+          type: string
+        configId:
+          type: string
+        identifierId:
+          type: string
+        identifierTypeId:
+          type: string
+        identifierTypeName:
+          type: string
+        identifierCode:
+          type: string
+        identifierValue:
+          type: string
+        partnerId:
+          type: string
+        flowSection:
+          type: string
+      type: object
+    directionType:
+      enum:
+      - INBOUND
+      - OUTBOUND
+      type: string
+    documentFlowStatusType:
+      enum:
+      - DRAFT
+      - DEPLOYED
+      - ALL
+      type: string
+    documentMappingConfig:
+      description: Document Mapping configuration for document flow.
+      example:
+        mappingContent: mappingContent
+        mappingSourceRef: mappingSourceRef
+        mappingType: DWL_SCRIPT
+        id: id
+      properties:
+        id:
+          type: string
+        mappingType:
+          enum:
+          - DWL_SCRIPT
+          - DWL_FILE
+          - MAP_API
+          type: string
+        mappingContent:
+          description: required only when the mapppingType is not MAP_API
+          type: string
+        mappingSourceRef:
+          description: For DWL_SCRIPT is Inline , DWL_FILE is the file name, and for
+            MAP_API is TargetAPI endpoint Id.
+          type: string
+      required:
+      - mappingSourceRef
+      - mappingType
+      title: DocumentMappingConfiguration
+      type: object
+    documentFlowSummary:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/documentFlowSummary_allOf'
+      title: Document Flow Summary
+    documentFlowDeploymentSummary:
+      allOf:
+      - $ref: '#/components/schemas/b2bEntity'
+      - $ref: '#/components/schemas/documentFlowDeploymentSummary_allOf'
+      title: Document Flow Deployment Summary
+    ediFormatTypes:
+      enum:
+      - X12
+      - EDIFACT
+      - JSON
+      type: string
+    ediFormat:
+      discriminator:
+        propertyName: formatType
+      example:
+        description: description
+        id: id
+        label: label
+        formatType: formatType
+      properties:
+        id:
+          type: string
+        formatType:
+          type: string
+        description:
+          type: string
+        label:
+          type: string
+      required:
+      - description
+      - label
+      title: EDI Format
+      type: object
+    ediFormatConfiguration:
+      example:
+        edifactControlNumberSettings:
+          requireUniqueInterchanges: true
+          initialControlNumber: initialControlNumber
+          requireUniqueMessages: true
+        controlNumberSettings:
+          requireUniqueISAcontrolNumbersISA13: true
+          requireUniqueGSControlNumbersGS06: true
+          requireUniqueTransactionSetControlNumbersST02: true
+          requireUniqueTransactionSetControlNumber: true
+          initialInterchangeControlNumber: initialInterchangeControlNumber
+          initialGSControlNumber: initialGSControlNumber
+          requireUniqueGSControlNumbers: true
+          initialTransactionSetControlNumber: initialTransactionSetControlNumber
+        envelopeHeaders:
+          authInfoISA02: authInfoISA02
+          componentElementSeparator: componentElementSeparator
+          interchangeReceiverIdISA07: interchangeReceiverIdISA07
+          securityInfoQualifierISA03: securityInfoQualifierISA03
+          implementationConventionReferenceST03: implementationConventionReferenceST03
+          repetitionSeparatorCharacterISA11: repetitionSeparatorCharacterISA11
+          defaultInterchangeUsageIndicatorISA15: defaultInterchangeUsageIndicatorISA15
+          repetitionInterchangeAcknowledmentsISA14: repetitionInterchangeAcknowledmentsISA14
+          securityInfoISA04: securityInfoISA04
+          interchangeReceiverIdQualifierISA07: interchangeReceiverIdQualifierISA07
+          interchangeControlStandardsIdentifierISA11: interchangeControlStandardsIdentifierISA11
+          responsibleAgencyCodeGS07: responsibleAgencyCodeGS07
+          authInfoQualifierISA01: authInfoQualifierISA01
+          interchangeControlVersionNumberISA12: interchangeControlVersionNumberISA12
+          releaseNumberGS08: releaseNumberGS08
+        writerSettings:
+          writeEnforceLengthLimits: true
+          enforceCodeSetValidationsWrite: true
+          enforceConditionalRulesOnWriter: true
+        configType: configType
+        characterSetEncoding:
+          componentElementSeparatorISA16: componentElementSeparatorISA16
+          characterSet: characterSet
+          writeUseCRLFLastLine: true
+          substitutionCharacter: substitutionCharacter
+          lineEndingBetweenSegments: lineEndingBetweenSegments
+          characterEncoding: characterEncoding
+        acknowledgementSettings:
+          FA: true
+          TA: true
+        formatTypeId: formatTypeId
+        ackEndpointId: ackEndpointId
+        terminatorDelimiter:
+          dataElementDelimiter: dataElementDelimiter
+          stringSubstituionCharacter: stringSubstituionCharacter
+          segmentTerminatorCharacter: segmentTerminatorCharacter
+        configId: configId
+        isTemplate: true
+        writeSettings:
+          writeEnforceLengthLimits: true
+          sendSyntaxVersion: sendSyntaxVersion
+          enforceWriteCharacters: true
+          alwaysSendUNA: true
+          enforceCodeSetValidationsWrite: true
+          requestAcks: true
+        parserSettings:
+          acknowledgeEveryTransaction: true
+          failDocumentWhenInvalidCharacterInValue: true
+          failDocumentWhenUnusedSegmentsAreIncluded: true
+          require997: true
+          checkDuplicateDays: 0
+          enforceCodeSetValidationsParse: true
+          failDocumentWhenTooManyRepeatsOfSegment: true
+          failDocumentWhenSegmentsAreOutOfOrder: true
+          failDocumentIfValueIsRepeatedTooManyTimes: true
+          enforceConditionalRulesOnParser: true
+          ackEndpointId: ackEndpointId
+          failDocumentWhenValueLengthOutsideAllowedRange: true
+          generateTA1: true
+          failDocumentIfUnknownSegmentsAreUsed: true
+          generate999: true
+        edifactParserSettings:
+          allowUnusedSegments: true
+          allowUnknownSegments: true
+          enforceSegmentRepeats: true
+          enforceSegmentOrder: true
+          enforceReadCharacters: true
+          enforceValueRepeats: true
+          enforceCodeSetValidationsParse: true
+          characterEncodingOverride: characterEncodingOverride
+          enforceLengthLimits: true
+        id: id
+        partnerId: partnerId
+        characterSetAndEncoding:
+          componentElementSeparatorISA16: componentElementSeparatorISA16
+          characterSet: characterSet
+          writeUseCRLFLastLine: true
+          substitutionCharacter: substitutionCharacter
+          lineEndingBetweenSegments: lineEndingBetweenSegments
+          characterEncoding: characterEncoding
+        formatType: formatType
+        separators:
+          segmentTerminator: segmentTerminator
+          dataSeparator: dataSeparator
+          componentSeparator: componentSeparator
+          releaseCharacter: releaseCharacter
+          repetitionSeparator: repetitionSeparator
+        characterSetAndDelimitersSettings:
+          segmentTerminator: segmentTerminator
+          lineEnding: lineEnding
+          writeUseCRLFLastLine: writeUseCRLFLastLine
+          dataSeparator: dataSeparator
+          testIndicator: testIndicator
+          componentSeparator: componentSeparator
+          releaseCharacter: releaseCharacter
+          repetitionSeparator: repetitionSeparator
+          characterEncoding: characterEncoding
+      properties:
+        id:
+          type: string
+        configType:
+          type: string
+        formatType:
+          type: string
+        formatTypeId:
+          type: string
+        partnerId:
+          type: string
+        ackEndpointId:
+          type: string
+        configId:
+          type: string
+        isTemplate:
+          type: boolean
+        characterSetAndDelimitersSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_characterSetAndDelimitersSettings'
+        writeSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_writeSettings'
+        edifactControlNumberSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_edifactControlNumberSettings'
+        edifactParserSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_edifactParserSettings'
+        separators:
+          $ref: '#/components/schemas/ediFormatConfiguration_separators'
+        acknowledgementSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_acknowledgementSettings'
+        writerSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_writerSettings'
+        characterSetEncoding:
+          $ref: '#/components/schemas/ediFormatConfiguration_characterSetEncoding'
+        terminatorDelimiter:
+          $ref: '#/components/schemas/ediFormatConfiguration_terminatorDelimiter'
+        controlNumberSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_controlNumberSettings'
+        characterSetAndEncoding:
+          $ref: '#/components/schemas/ediFormatConfiguration_characterSetAndEncoding'
+        parserSettings:
+          $ref: '#/components/schemas/ediFormatConfiguration_parserSettings'
+        envelopeHeaders:
+          $ref: '#/components/schemas/ediFormatConfiguration_envelopeHeaders'
+      title: EDI Format Configuration
+      type: object
+    ediFormatPartner:
+      discriminator:
+        propertyName: formatType
+      properties:
+        id:
+          type: string
+        configType:
+          type: string
+        formatType:
+          type: string
+        formatTypeId:
+          type: string
+        partnerId:
+          nullable: true
+          type: string
+      required:
+      - configType
+      - formatTypeId
+      - partnerId
+      title: EDI Format Partner
+      type: object
+    ediFormatVersion:
+      example:
+        description: description
+        id: id
+        label: label
+        formatType: formatType
+        version: version
+      properties:
+        id:
+          type: string
+        formatType:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        label:
+          type: string
+      required:
+      - description
+      - formatType
+      - label
+      - version
+      title: EDI Format Version
+      type: object
+    ediDocumentType:
+      example:
+        schemaPath: schemaPath
+        description: description
+        id: id
+        documentName: documentName
+        label: label
+        formatType: formatType
+        version: version
+      properties:
+        id:
+          type: string
+        documentName:
+          type: string
+        label:
+          type: string
+        schemaPath:
+          type: string
+        description:
+          type: string
+        formatType:
+          type: string
+        version:
+          type: string
+      required:
+      - description
+      - documentName
+      - formatType
+      - label
+      - schemaPath
+      - version
+      title: EDI Document Type
+      type: object
+    baseEdiDocument:
+      additionalProperties: false
+      discriminator:
+        propertyName: isStandard
+      example:
+        isStandard: true
+        ediDocumentTypeId: ediDocumentTypeId
+        name: name
+        id: id
+        baseType:
+          schemaPath: schemaPath
+          description: description
+          id: id
+          documentName: documentName
+          label: label
+          formatType: formatType
+          version: version
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        isStandard:
+          type: boolean
+        ediDocumentTypeId:
+          type: string
+        baseType:
+          $ref: '#/components/schemas/ediDocumentType'
+      required:
+      - ediDocumentTypeId
+      - isStandard
+      - name
+      type: object
+    X12Format:
+      $ref: '#/components/schemas/ediFormat'
+    ediConfig:
+      discriminator:
+        propertyName: formatType
+      properties:
+        formatType:
+          type: string
+      required:
+      - formatType
+      title: EDI Configuration
+      type: object
+    X12Config:
+      allOf:
+      - $ref: '#/components/schemas/ediConfig'
+      - $ref: '#/components/schemas/X12Config_allOf'
+      title: X12 Configuration
+    ediDocument:
+      description: EDI Document instanace. Individual document instance can be distinguished
+        by formatType types such as X12.
+      discriminator:
+        propertyName: formatType
+      properties:
+        formatType:
+          type: string
+      required:
+      - formatType
+      title: EDI Document
+      type: object
+    X12Document:
+      allOf:
+      - $ref: '#/components/schemas/ediDocument'
+      - $ref: '#/components/schemas/X12Document_allOf'
+      title: X12 Document
+    authModeBaseConfig:
+      additionalProperties: false
+      discriminator:
+        propertyName: authType
+      example:
+        csmSecret:
+          grantResponse:
+            path: path
+            accessGrant: accessGrant
+          jsonDetails: jsonDetails
+          secretId: secretId
+          secretGroupId: secretGroupId
+        authType: authType
+      properties:
+        authType:
+          type: string
+        csmSecret:
+          $ref: '#/components/schemas/CSMSecret'
+      required:
+      - authType
+      title: AuthModeBaseConfig
+      type: object
+    CSMSecretGrant:
+      example:
+        path: path
+        accessGrant: accessGrant
+      properties:
+        path:
+          type: string
+        accessGrant:
+          type: string
+      required:
+      - accessGrant
+      - path
+      title: CSMSecretGrant
+      type: object
+    CSMSecret:
+      description: This holds the CSM Secret details
+      example:
+        grantResponse:
+          path: path
+          accessGrant: accessGrant
+        jsonDetails: jsonDetails
+        secretId: secretId
+        secretGroupId: secretGroupId
+      properties:
+        secretId:
+          type: string
+        secretGroupId:
+          type: string
+        grantResponse:
+          $ref: '#/components/schemas/CSMSecretGrant'
+        jsonDetails:
+          nullable: true
+          type: string
+      required:
+      - grantResponse
+      - secretGroupId
+      - secretId
+      title: CSMSecret
+      type: object
+    authModeNone:
+      $ref: '#/components/schemas/authModeBaseConfig'
+    TLSContext:
+      description: This can be used to configure the TLS context of HTTPS endpoints
+      example:
+        needCertificate: true
+        certificateId: "true"
+        insecure: false
+      properties:
+        insecure:
+          default: false
+          type: boolean
+        needCertificate:
+          default: true
+          type: boolean
+        certificateId:
+          default: "true"
+          type: string
+      required:
+      - insecure
+      - needCertificate
+      title: TLSConext
+      type: object
+    authModeBasic:
+      allOf:
+      - $ref: '#/components/schemas/authModeBaseConfig'
+      - $ref: '#/components/schemas/authModeBasic_allOf'
+      description: This can be used for HTTP Outbound authentication.
+      title: Auth Mode Basic Auth
+    authModeClientCredentials:
+      allOf:
+      - $ref: '#/components/schemas/authModeBaseConfig'
+      - $ref: '#/components/schemas/authModeClientCredentials_allOf'
+      description: This can be used for HTTP Outbound authentication.
+      title: Auth Mode Client Credentials
+    authModeAPIKey:
+      allOf:
+      - $ref: '#/components/schemas/authModeBaseConfig'
+      - $ref: '#/components/schemas/authModeAPIKey_allOf'
+      description: This can be used for HTTP Outbound authentication.
+      title: Auth Mode API Key
+    authModeOAuth:
+      allOf:
+      - $ref: '#/components/schemas/authModeBaseConfig'
+      - $ref: '#/components/schemas/authModeOAuth_allOf'
+      description: This can be used for HTTP Outbound authentication.
+      title: Auth Mode OAuth2
+    authModePKI:
+      allOf:
+      - $ref: '#/components/schemas/authModeBaseConfig'
+      - $ref: '#/components/schemas/authModePKI_allOf'
+      description: This is a possible future extension for SFTP security.
+      title: Auth Mode Private Identity File
+    baseEndpointConfig:
+      additionalProperties: true
+      discriminator:
+        propertyName: configName
+      example:
+        configName: configName
+        authMode:
+          csmSecret:
+            grantResponse:
+              path: path
+              accessGrant: accessGrant
+            jsonDetails: jsonDetails
+            secretId: secretId
+            secretGroupId: secretGroupId
+          authType: authType
+        path: path
+        serverAddress: serverAddress
+        serverPort: 5
+        movedPath: movedPath
+      properties:
+        configName:
+          type: string
+        serverAddress:
+          description: Defines Server/Host Address
+          title: Server Address
+          type: string
+        serverPort:
+          title: Server Port
+          type: integer
+        authMode:
+          $ref: '#/components/schemas/authModeBaseConfig'
+        path:
+          type: string
+        movedPath:
+          nullable: true
+          type: string
+      required:
+      - configName
+      title: Base Endpoint Config object
+      type: object
+    EndpointRoleType:
+      enum:
+      - RECEIVE
+      - SEND
+      - RECEIVE_ACK
+      - PRE_API
+      - POST_API
+      - STORAGE_API
+      type: string
+    baseEndpoint:
+      discriminator:
+        propertyName: endpointType
+      example:
+        endpointType: endpointType
+        description: description
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        environmentId: environmentId
+        name: name
+        endpointTypeId: endpointTypeId
+        id: id
+        partnerId: partnerId
+        config:
+          configName: configName
+          authMode:
+            csmSecret:
+              grantResponse:
+                path: path
+                accessGrant: accessGrant
+              jsonDetails: jsonDetails
+              secretId: secretId
+              secretGroupId: secretGroupId
+            authType: authType
+          path: path
+          serverAddress: serverAddress
+          serverPort: 5
+          movedPath: movedPath
+        deployment:
+          port: 1
+          name: name
+          id: id
+          runtimeDeploymentId: 6
+          status: ACTIVE
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        environmentId:
+          type: string
+        endpointTypeId:
+          type: string
+        partner:
+          $ref: '#/components/schemas/partner'
+        partnerId:
+          type: string
+        deployment:
+          $ref: '#/components/schemas/EndpointDeployment'
+        endpointRole:
+          $ref: '#/components/schemas/EndpointRoleType'
+        endpointType:
+          type: string
+        config:
+          $ref: '#/components/schemas/baseEndpointConfig'
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/UserDetail'
+        updatedAt:
+          format: date-time
+          type: string
+        updatedBy:
+          $ref: '#/components/schemas/UserDetail'
+      required:
+      - config
+      - description
+      - endpointRole
+      - endpointTypeId
+      - environmentId
+      - name
+      title: Base Endpoint
+      type: object
+    Endpoint:
+      example:
+        endpointRole: RECEIVE
+        environmentId: environmentId
+        endpointType: endpointType
+        visibility: visibility
+        supportedFormatTypes: supportedFormatTypes
+        name: name
+        endpointTypeId: endpointTypeId
+        description: description
+        id: id
+        partnerId: partnerId
+        config:
+          configName: configName
+          manageWithApiManager: true
+          associatedReferenceIdentifierId: associatedReferenceIdentifierId
+          pollingFrequency: 6
+          usage: usage
+          fileNamePattern: fileNamePattern
+          serverAddress: serverAddress
+          vpc:
+            enabled: true
+          tlsContext:
+            needCertificate: true
+            certificateId: "true"
+            insecure: false
+          serverPort: 0
+          authMode:
+            clientIdHeader: clientIdHeader
+            password: password
+            clientId: clientId
+            clientSecretHeader: clientSecretHeader
+            clientSecret: clientSecret
+            authType: authType
+            username: username
+          credentialType: credentialType
+          path: path
+          protocol: protocol
+          sizeCheckWaitTime: 1
+          autoDiscoveryId: autoDiscoveryId
+          validWithoutPartner: true
+          associatedMessageTypeId: associatedMessageTypeId
+          movedPath: movedPath
+          connectionIdleTimeout: 5
+          responseTimeout: 5
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        environmentId:
+          type: string
+        endpointTypeId:
+          type: string
+        partnerId:
+          type: string
+        endpointRole:
+          enum:
+          - RECEIVE
+          - SEND
+          - RECEIVE_ACK
+          - PRE_API
+          - POST_API
+          - STORAGE_API
+          type: string
+        endpointType:
+          type: string
+        visibility:
+          type: string
+        supportedFormatTypes:
+          type: string
+        config:
+          $ref: '#/components/schemas/EndpointConfig'
+      title: Endpoint
+      type: object
+    EndpointConfig:
+      additionalProperties: true
+      example:
+        configName: configName
+        manageWithApiManager: true
+        associatedReferenceIdentifierId: associatedReferenceIdentifierId
+        pollingFrequency: 6
+        usage: usage
+        fileNamePattern: fileNamePattern
+        serverAddress: serverAddress
+        vpc:
+          enabled: true
+        tlsContext:
+          needCertificate: true
+          certificateId: "true"
+          insecure: false
+        serverPort: 0
+        authMode:
+          clientIdHeader: clientIdHeader
+          password: password
+          clientId: clientId
+          clientSecretHeader: clientSecretHeader
+          clientSecret: clientSecret
+          authType: authType
+          username: username
+        credentialType: credentialType
+        path: path
+        protocol: protocol
+        sizeCheckWaitTime: 1
+        autoDiscoveryId: autoDiscoveryId
+        validWithoutPartner: true
+        associatedMessageTypeId: associatedMessageTypeId
+        movedPath: movedPath
+        connectionIdleTimeout: 5
+        responseTimeout: 5
+      properties:
+        configName:
+          type: string
+        serverAddress:
+          type: string
+        serverPort:
+          type: integer
+        authMode:
+          $ref: '#/components/schemas/authModeConfig'
+        path:
+          type: string
+        movedPath:
+          type: string
+        pollingFrequency:
+          type: integer
+        sizeCheckWaitTime:
+          type: integer
+        responseTimeout:
+          type: integer
+        connectionIdleTimeout:
+          type: integer
+        manageWithApiManager:
+          type: boolean
+        autoDiscoveryId:
+          type: string
+        credentialType:
+          type: string
+        usage:
+          type: string
+        associatedMessageTypeId:
+          type: string
+        protocol:
+          type: string
+        validWithoutPartner:
+          type: boolean
+        associatedReferenceIdentifierId:
+          type: string
+        fileNamePattern:
+          type: string
+        tlsContext:
+          $ref: '#/components/schemas/TLSContext'
+        vpc:
+          $ref: '#/components/schemas/EndpointConfig_vpc'
+      title: Endpoint Config object
+      type: object
+    authModeConfig:
+      example:
+        clientIdHeader: clientIdHeader
+        password: password
+        clientId: clientId
+        clientSecretHeader: clientSecretHeader
+        clientSecret: clientSecret
+        authType: authType
+        username: username
+      properties:
+        authType:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        clientIdHeader:
+          type: string
+        clientSecretHeader:
+          type: string
+      title: AuthModeConfig
+      type: object
+    EndpointDeployment:
+      example:
+        port: 1
+        name: name
+        id: id
+        runtimeDeploymentId: 6
+        status: ACTIVE
+      properties:
+        id:
+          type: string
+        status:
+          enum:
+          - ACTIVE
+          - INACTIVE
+          type: string
+        name:
+          type: string
+        runtimeDeploymentId:
+          type: integer
+        port:
+          type: integer
+      required:
+      - name
+      - port
+      - runtimeDeploymentId
+      - status
+      title: EndpointDeployment
+      type: object
+    sftpConfig:
+      allOf:
+      - $ref: '#/components/schemas/baseEndpointConfig'
+      - $ref: '#/components/schemas/sftpConfig_allOf'
+      description: SFTP Configuration
+      title: SFTPConfig
+    sftp:
+      allOf:
+      - $ref: '#/components/schemas/baseEndpoint'
+      - $ref: '#/components/schemas/sftp_allOf'
+      description: SFTP Endpoint Configuration
+      title: SFTPEndpoint
+    httpConfig:
+      allOf:
+      - $ref: '#/components/schemas/baseEndpointConfig'
+      - $ref: '#/components/schemas/httpConfig_allOf'
+      description: HTTP Configuration
+      title: HTTPConfig
+    http:
+      allOf:
+      - $ref: '#/components/schemas/baseEndpoint'
+      - $ref: '#/components/schemas/http_allOf'
+      description: HTTP(S) Endpoint
+      title: HTTPEndpoint
+    DeploymentPostRequest:
+      description: This is used for posting a new deployment for a message flow.
+      example:
+        documentFlowId: documentFlowId
+      properties:
+        documentFlowId:
+          type: string
+      required:
+      - documentFlowId
+      title: DeploymentPostRequest
+      type: object
+    DeploymentStatusType:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DRAFT
+      - FAIL
+      title: DeploymentStatusType
+      type: string
+    DeploymentStatusMessage:
+      properties:
+        status:
+          $ref: '#/components/schemas/DeploymentStatusType'
+        message:
+          type: string
+      required:
+      - status
+      title: DeploymentStatusMessage
+      type: object
+    documentFlowConfigInstance:
+      description: Document Flow configuration for deployment
+      example:
+        sourceDocType:
+          isStandard: true
+          ediDocumentTypeId: ediDocumentTypeId
+          name: name
+          id: id
+          baseType:
+            schemaPath: schemaPath
+            description: description
+            id: id
+            documentName: documentName
+            label: label
+            formatType: formatType
+            version: version
+        targetDocType:
+          isStandard: true
+          ediDocumentTypeId: ediDocumentTypeId
+          name: name
+          id: id
+          baseType:
+            schemaPath: schemaPath
+            description: description
+            id: id
+            documentName: documentName
+            label: label
+            formatType: formatType
+            version: version
+        partnerToId: partnerToId
+        receivingEndpoint:
+          endpointType: endpointType
+          description: description
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          environmentId: environmentId
+          name: name
+          endpointTypeId: endpointTypeId
+          id: id
+          partnerId: partnerId
+          config:
+            configName: configName
+            authMode:
+              csmSecret:
+                grantResponse:
+                  path: path
+                  accessGrant: accessGrant
+                jsonDetails: jsonDetails
+                secretId: secretId
+                secretGroupId: secretGroupId
+              authType: authType
+            path: path
+            serverAddress: serverAddress
+            serverPort: 5
+            movedPath: movedPath
+          deployment:
+            port: 1
+            name: name
+            id: id
+            runtimeDeploymentId: 6
+            status: ACTIVE
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        targetEndpoint:
+          endpointType: endpointType
+          description: description
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          environmentId: environmentId
+          name: name
+          endpointTypeId: endpointTypeId
+          id: id
+          partnerId: partnerId
+          config:
+            configName: configName
+            authMode:
+              csmSecret:
+                grantResponse:
+                  path: path
+                  accessGrant: accessGrant
+                jsonDetails: jsonDetails
+                secretId: secretId
+                secretGroupId: secretGroupId
+              authType: authType
+            path: path
+            serverAddress: serverAddress
+            serverPort: 5
+            movedPath: movedPath
+          deployment:
+            port: 1
+            name: name
+            id: id
+            runtimeDeploymentId: 6
+            status: ACTIVE
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        version: 0
+        messageStatus: messageStatus
+        preProcessingEndpoint:
+          endpointType: endpointType
+          description: description
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          environmentId: environmentId
+          name: name
+          endpointTypeId: endpointTypeId
+          id: id
+          partnerId: partnerId
+          config:
+            configName: configName
+            authMode:
+              csmSecret:
+                grantResponse:
+                  path: path
+                  accessGrant: accessGrant
+                jsonDetails: jsonDetails
+                secretId: secretId
+                secretGroupId: secretGroupId
+              authType: authType
+            path: path
+            serverAddress: serverAddress
+            serverPort: 5
+            movedPath: movedPath
+          deployment:
+            port: 1
+            name: name
+            id: id
+            runtimeDeploymentId: 6
+            status: ACTIVE
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        configId: configId
+        name: name
+        receivingAckConfig:
+          ackConfigType: ackConfigType
+        documentMapping:
+        - mappingContent: mappingContent
+          mappingSourceRef: mappingSourceRef
+          mappingType: DWL_SCRIPT
+          id: id
+        - mappingContent: mappingContent
+          mappingSourceRef: mappingSourceRef
+          mappingType: DWL_SCRIPT
+          id: id
+        id: id
+        receivingAckEndpoint:
+          endpointType: endpointType
+          description: description
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          environmentId: environmentId
+          name: name
+          endpointTypeId: endpointTypeId
+          id: id
+          partnerId: partnerId
+          config:
+            configName: configName
+            authMode:
+              csmSecret:
+                grantResponse:
+                  path: path
+                  accessGrant: accessGrant
+                jsonDetails: jsonDetails
+                secretId: secretId
+                secretGroupId: secretGroupId
+              authType: authType
+            path: path
+            serverAddress: serverAddress
+            serverPort: 5
+            movedPath: movedPath
+          deployment:
+            port: 1
+            name: name
+            id: id
+            runtimeDeploymentId: 6
+            status: ACTIVE
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        partnerFromId: partnerFromId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/DeploymentStatusType'
+        configId:
+          type: string
+        direction:
+          $ref: '#/components/schemas/directionType'
+        version:
+          type: integer
+        partnerToId:
+          type: string
+        partnerFromId:
+          type: string
+        preProcessingEndpoint:
+          $ref: '#/components/schemas/baseEndpoint'
+        receivingEndpoint:
+          $ref: '#/components/schemas/baseEndpoint'
+        receivingAckEndpoint:
+          $ref: '#/components/schemas/baseEndpoint'
+        targetEndpoint:
+          $ref: '#/components/schemas/baseEndpoint'
+        sourceDocType:
+          $ref: '#/components/schemas/baseEdiDocument'
+        targetDocType:
+          $ref: '#/components/schemas/baseEdiDocument'
+        documentMapping:
+          items:
+            $ref: '#/components/schemas/documentMappingConfig'
+          type: array
+        messageStatus:
+          type: string
+        receivingAckConfig:
+          $ref: '#/components/schemas/BaseAckConfig'
+      required:
+      - configId
+      - direction
+      - documentMapping
+      - name
+      - partnerFromId
+      - partnerToId
+      - receivingEndpoint
+      - sourceDocType
+      - status
+      - targetDocType
+      - targetEndpoint
+      - version
+      title: DocumentFlowConfigInstance
+      type: object
+    Document:
+      discriminator:
+        propertyName: document
+      example:
+        documentTypeParameters: documentTypeParameters
+        documentFlowDirection: INBOUND
+        isStandard: true
+        documentTypeRole: SEND
+        ediDocumentTypeId: ediDocumentTypeId
+        messageDataScript: messageDataScript
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        documentFlowDirection:
+          enum:
+          - INBOUND
+          - OUTBOUND
+          type: string
+        documentTypeRole:
+          enum:
+          - SEND
+          - RECEIVE
+          type: string
+        ediDocumentTypeId:
+          type: string
+        isStandard:
+          type: boolean
+        name:
+          type: string
+        messageDataScript:
+          type: string
+        documentTypeParameters:
+          type: string
+      required:
+      - documentFlowDirection
+      - documentTypeRole
+      - ediDocumentTypeId
+      - isStandard
+      - name
+      title: Document or Message Type
+      type: object
+    inline_response_202:
+      example:
+        id: id
+      properties:
+        id:
+          title: Id
+          type: string
+      required:
+      - id
+      type: object
+    inline_object:
+      properties:
+        certType:
+          type: string
+        certName:
+          type: string
+        certFile:
+          type: string
+      required:
+      - certFile
+      - certName
+      - certType
+      type: object
+    AckConfigX12_allOf:
+      properties:
+        require997:
+          type: boolean
+        generate999:
+          type: boolean
+      type: object
+    CreateEntityResponse_allOf:
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+      type: object
+    UserDetail_allOf:
+      properties:
+        userId:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        userName:
+          type: string
+      type: object
+    address_allOf:
+      properties:
+        id:
+          type: string
+        addressLine_1:
+          type: string
+        addressLine_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+      type: object
+    contact_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        status:
+          default: ACTIVE
+          description: Field referring the status of the contact (for crud operations)
+          enum:
+          - CREATED
+          - UPDATED
+          - ACTIVE
+          type: string
+        contactType:
+          $ref: '#/components/schemas/contactType'
+      type: object
+    contactType_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        label:
+          type: string
+      type: object
+    identifier_allOf:
+      properties:
+        id:
+          type: string
+        identifierTypeQualifierId:
+          type: string
+        status:
+          enum:
+          - CREATED
+          - UPDATED
+          - ACTIVE
+          type: string
+        qualifierLabel:
+          type: string
+        typeLabel:
+          type: string
+        code:
+          type: string
+        value:
+          type: string
+      required:
+      - identifierTypeQualifierId
+      - status
+      - value
+      type: object
+    identifierType_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        readonly:
+          type: boolean
+        qualifiers:
+          items:
+            type: object
+          type: array
+        environment_id:
+          type: string
+      type: object
+    identifierTypeQualifier_allOf:
+      properties:
+        id:
+          type: string
+        identifierTypeId:
+          type: string
+        code:
+          type: string
+        label:
+          type: string
+        segmentIdentifier:
+          type: string
+        descritpion:
+          type: string
+        environmentId:
+          type: string
+      type: object
+    partner_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        websiteUrl:
+          type: string
+        status:
+          $ref: '#/components/schemas/timedStatus'
+        environmentId:
+          type: string
+        hostFlag:
+          default: false
+          type: boolean
+      required:
+      - environmentId
+      - hostFlag
+      - id
+      - name
+      type: object
+    partnerProfile_allOf:
+      properties:
+        logo:
+          $ref: '#/components/schemas/logo'
+        contacts:
+          items:
+            $ref: '#/components/schemas/contact'
+          type: array
+        identifiers:
+          items:
+            $ref: '#/components/schemas/identifier'
+          type: array
+        addresses:
+          items:
+            $ref: '#/components/schemas/address'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/UserDetail'
+        updated_at:
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/UserDetail'
+        protocols:
+          items:
+            type: string
+          type: array
+        standars:
+          items:
+            type: string
+          type: array
+        usedInDeployments:
+          $ref: '#/components/schemas/UsedInDeployments'
+      required:
+      - created_at
+      - created_by
+      - identifiers
+      - protocols
+      - standars
+      - updated_at
+      - updated_by
+      - usedInDeployments
+      type: object
+    UsedInDeployments_allOf:
+      properties:
+        inboundCount:
+          type: integer
+        outboundCount:
+          type: integer
+      type: object
+    timedStatus_allOf:
+      properties:
+        id:
+          type: string
+        startDate:
+          format: date
+          nullable: true
+          type: string
+        endDate:
+          format: date
+          nullable: true
+          type: string
+        status:
+          default: DRAFT
+          enum:
+          - DRAFT
+          - ACTIVE
+          - INACTIVE
+          - BLOCKED
+          type: string
+      type: object
+    documentFlow_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        direction:
+          enum:
+          - INBOUND
+          - OUTBOUND
+          type: string
+        partnerFromId:
+          type: string
+        partnerToId:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        modifierAt:
+          format: date-time
+          type: string
+        modifiedBy:
+          type: string
+        configurations:
+          items:
+            $ref: '#/components/schemas/documentFlowConfig'
+          type: array
+      type: object
+    documentFlowConfig_allOf_partnerIdentifiersConfig:
+      properties:
+        useAllHostIdentifiers:
+          type: boolean
+        useAllPartnerIdentifiers:
+          type: boolean
+        identifiers:
+          items:
+            $ref: '#/components/schemas/PartnerIdentifiersConfigIdentifiers'
+          type: array
+      type: object
+    documentFlowConfig_allOf:
+      properties:
+        id:
+          type: string
+        documentFlowId:
+          type: string
+        environmentId:
+          type: string
+        status:
+          default: DRAFT
+          enum:
+          - DRAFT
+          - DEPLOYED
+          - ALL
+          type: string
+        version:
+          type: integer
+        preProcessingEndpointId:
+          type: string
+        receivingEndpointId:
+          type: string
+        receivingAckEndpointId:
+          type: string
+        targetEndpointId:
+          type: string
+        sourceDocTypeId:
+          type: string
+        targetDocTypeId:
+          type: string
+        documentMapping:
+          items:
+            $ref: '#/components/schemas/documentMappingConfig'
+          type: array
+        receivingAckConfig:
+          $ref: '#/components/schemas/BaseAckConfig'
+        partnerIdentifiersConfig:
+          $ref: '#/components/schemas/documentFlowConfig_allOf_partnerIdentifiersConfig'
+      required:
+      - status
+      type: object
+    documentFlowSummary_allOf:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        direction:
+          $ref: '#/components/schemas/directionType'
+        partnerFrom:
+          $ref: '#/components/schemas/partner'
+        partnerTo:
+          $ref: '#/components/schemas/partner'
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        updatedBy:
+          type: string
+        deploymentSummary:
+          items:
+            $ref: '#/components/schemas/documentFlowDeploymentSummary'
+          type: array
+      type: object
+    documentFlowDeploymentSummary_allOf:
+      properties:
+        id:
+          type: string
+        environmentId:
+          type: string
+        environmentName:
+          type: string
+        documentsProcessed:
+          default: 0
+          type: number
+      type: object
+    ediFormatConfiguration_characterSetAndDelimitersSettings:
+      example:
+        segmentTerminator: segmentTerminator
+        lineEnding: lineEnding
+        writeUseCRLFLastLine: writeUseCRLFLastLine
+        dataSeparator: dataSeparator
+        testIndicator: testIndicator
+        componentSeparator: componentSeparator
+        releaseCharacter: releaseCharacter
+        repetitionSeparator: repetitionSeparator
+        characterEncoding: characterEncoding
+      properties:
+        characterEncoding:
+          type: string
+        dataSeparator:
+          type: string
+        componentSeparator:
+          type: string
+        repetitionSeparator:
+          type: string
+        segmentTerminator:
+          type: string
+        releaseCharacter:
+          type: string
+        lineEnding:
+          type: string
+        testIndicator:
+          type: string
+        writeUseCRLFLastLine:
+          type: string
+      type: object
+    ediFormatConfiguration_writeSettings:
+      example:
+        writeEnforceLengthLimits: true
+        sendSyntaxVersion: sendSyntaxVersion
+        enforceWriteCharacters: true
+        alwaysSendUNA: true
+        enforceCodeSetValidationsWrite: true
+        requestAcks: true
+      properties:
+        sendSyntaxVersion:
+          type: string
+        alwaysSendUNA:
+          type: boolean
+        enforceWriteCharacters:
+          type: boolean
+        writeEnforceLengthLimits:
+          type: boolean
+        requestAcks:
+          type: boolean
+        enforceCodeSetValidationsWrite:
+          type: boolean
+      type: object
+    ediFormatConfiguration_edifactControlNumberSettings:
+      example:
+        requireUniqueInterchanges: true
+        initialControlNumber: initialControlNumber
+        requireUniqueMessages: true
+      properties:
+        requireUniqueInterchanges:
+          type: boolean
+        requireUniqueMessages:
+          type: boolean
+        initialControlNumber:
+          type: string
+      type: object
+    ediFormatConfiguration_edifactParserSettings:
+      example:
+        allowUnusedSegments: true
+        allowUnknownSegments: true
+        enforceSegmentRepeats: true
+        enforceSegmentOrder: true
+        enforceReadCharacters: true
+        enforceValueRepeats: true
+        enforceCodeSetValidationsParse: true
+        characterEncodingOverride: characterEncodingOverride
+        enforceLengthLimits: true
+      properties:
+        enforceLengthLimits:
+          type: boolean
+        enforceValueRepeats:
+          type: boolean
+        enforceReadCharacters:
+          type: boolean
+        allowUnknownSegments:
+          type: boolean
+        enforceSegmentOrder:
+          type: boolean
+        allowUnusedSegments:
+          type: boolean
+        enforceSegmentRepeats:
+          type: boolean
+        enforceCodeSetValidationsParse:
+          type: boolean
+        characterEncodingOverride:
+          type: string
+      type: object
+    ediFormatConfiguration_separators:
+      example:
+        segmentTerminator: segmentTerminator
+        dataSeparator: dataSeparator
+        componentSeparator: componentSeparator
+        releaseCharacter: releaseCharacter
+        repetitionSeparator: repetitionSeparator
+      properties:
+        dataSeparator:
+          type: string
+        componentSeparator:
+          type: string
+        repetitionSeparator:
+          type: string
+        segmentTerminator:
+          type: string
+        releaseCharacter:
+          type: string
+      type: object
+    ediFormatConfiguration_acknowledgementSettings:
+      example:
+        FA: true
+        TA: true
+      properties:
+        TA:
+          type: boolean
+        FA:
+          type: boolean
+      type: object
+    ediFormatConfiguration_writerSettings:
+      example:
+        writeEnforceLengthLimits: true
+        enforceCodeSetValidationsWrite: true
+        enforceConditionalRulesOnWriter: true
+      properties:
+        writeEnforceLengthLimits:
+          type: boolean
+        enforceConditionalRulesOnWriter:
+          type: boolean
+        enforceCodeSetValidationsWrite:
+          type: boolean
+      type: object
+    ediFormatConfiguration_characterSetEncoding:
+      example:
+        componentElementSeparatorISA16: componentElementSeparatorISA16
+        characterSet: characterSet
+        writeUseCRLFLastLine: true
+        substitutionCharacter: substitutionCharacter
+        lineEndingBetweenSegments: lineEndingBetweenSegments
+        characterEncoding: characterEncoding
+      properties:
+        characterSet:
+          type: string
+        characterEncoding:
+          type: string
+        lineEndingBetweenSegments:
+          type: string
+        componentElementSeparatorISA16:
+          type: string
+        substitutionCharacter:
+          type: string
+        writeUseCRLFLastLine:
+          type: boolean
+      type: object
+    ediFormatConfiguration_terminatorDelimiter:
+      example:
+        dataElementDelimiter: dataElementDelimiter
+        stringSubstituionCharacter: stringSubstituionCharacter
+        segmentTerminatorCharacter: segmentTerminatorCharacter
+      properties:
+        segmentTerminatorCharacter:
+          type: string
+        dataElementDelimiter:
+          type: string
+        stringSubstituionCharacter:
+          type: string
+      type: object
+    ediFormatConfiguration_controlNumberSettings:
+      example:
+        requireUniqueISAcontrolNumbersISA13: true
+        requireUniqueGSControlNumbersGS06: true
+        requireUniqueTransactionSetControlNumbersST02: true
+        requireUniqueTransactionSetControlNumber: true
+        initialInterchangeControlNumber: initialInterchangeControlNumber
+        initialGSControlNumber: initialGSControlNumber
+        requireUniqueGSControlNumbers: true
+        initialTransactionSetControlNumber: initialTransactionSetControlNumber
+      properties:
+        initialInterchangeControlNumber:
+          type: string
+        initialGSControlNumber:
+          type: string
+        initialTransactionSetControlNumber:
+          type: string
+        requireUniqueGSControlNumbers:
+          type: boolean
+        requireUniqueTransactionSetControlNumber:
+          type: boolean
+        requireUniqueISAcontrolNumbersISA13:
+          type: boolean
+        requireUniqueGSControlNumbersGS06:
+          type: boolean
+        requireUniqueTransactionSetControlNumbersST02:
+          type: boolean
+      type: object
+    ediFormatConfiguration_characterSetAndEncoding:
+      example:
+        componentElementSeparatorISA16: componentElementSeparatorISA16
+        characterSet: characterSet
+        writeUseCRLFLastLine: true
+        substitutionCharacter: substitutionCharacter
+        lineEndingBetweenSegments: lineEndingBetweenSegments
+        characterEncoding: characterEncoding
+      properties:
+        characterSet:
+          type: string
+        characterEncoding:
+          type: string
+        lineEndingBetweenSegments:
+          type: string
+        componentElementSeparatorISA16:
+          type: string
+        writeUseCRLFLastLine:
+          type: boolean
+        substitutionCharacter:
+          type: string
+      type: object
+    ediFormatConfiguration_parserSettings:
+      example:
+        acknowledgeEveryTransaction: true
+        failDocumentWhenInvalidCharacterInValue: true
+        failDocumentWhenUnusedSegmentsAreIncluded: true
+        require997: true
+        checkDuplicateDays: 0
+        enforceCodeSetValidationsParse: true
+        failDocumentWhenTooManyRepeatsOfSegment: true
+        failDocumentWhenSegmentsAreOutOfOrder: true
+        failDocumentIfValueIsRepeatedTooManyTimes: true
+        enforceConditionalRulesOnParser: true
+        ackEndpointId: ackEndpointId
+        failDocumentWhenValueLengthOutsideAllowedRange: true
+        generateTA1: true
+        failDocumentIfUnknownSegmentsAreUsed: true
+        generate999: true
+      properties:
+        ackEndpointId:
+          type: string
+        checkDuplicateDays:
+          type: integer
+        failDocumentWhenValueLengthOutsideAllowedRange:
+          type: boolean
+        failDocumentWhenInvalidCharacterInValue:
+          type: boolean
+        failDocumentIfValueIsRepeatedTooManyTimes:
+          type: boolean
+        failDocumentIfUnknownSegmentsAreUsed:
+          type: boolean
+        failDocumentWhenSegmentsAreOutOfOrder:
+          type: boolean
+        failDocumentWhenTooManyRepeatsOfSegment:
+          type: boolean
+        failDocumentWhenUnusedSegmentsAreIncluded:
+          type: boolean
+        enforceConditionalRulesOnParser:
+          type: boolean
+        enforceCodeSetValidationsParse:
+          type: boolean
+        acknowledgeEveryTransaction:
+          type: boolean
+        generateTA1:
+          type: boolean
+        generate999:
+          type: boolean
+        require997:
+          type: boolean
+      type: object
+    ediFormatConfiguration_envelopeHeaders:
+      example:
+        authInfoISA02: authInfoISA02
+        componentElementSeparator: componentElementSeparator
+        interchangeReceiverIdISA07: interchangeReceiverIdISA07
+        securityInfoQualifierISA03: securityInfoQualifierISA03
+        implementationConventionReferenceST03: implementationConventionReferenceST03
+        repetitionSeparatorCharacterISA11: repetitionSeparatorCharacterISA11
+        defaultInterchangeUsageIndicatorISA15: defaultInterchangeUsageIndicatorISA15
+        repetitionInterchangeAcknowledmentsISA14: repetitionInterchangeAcknowledmentsISA14
+        securityInfoISA04: securityInfoISA04
+        interchangeReceiverIdQualifierISA07: interchangeReceiverIdQualifierISA07
+        interchangeControlStandardsIdentifierISA11: interchangeControlStandardsIdentifierISA11
+        responsibleAgencyCodeGS07: responsibleAgencyCodeGS07
+        authInfoQualifierISA01: authInfoQualifierISA01
+        interchangeControlVersionNumberISA12: interchangeControlVersionNumberISA12
+        releaseNumberGS08: releaseNumberGS08
+      properties:
+        authInfoQualifierISA01:
+          type: string
+        authInfoISA02:
+          type: string
+        securityInfoQualifierISA03:
+          type: string
+        securityInfoISA04:
+          type: string
+        interchangeReceiverIdQualifierISA07:
+          type: string
+        interchangeReceiverIdISA07:
+          type: string
+        repetitionSeparatorCharacterISA11:
+          type: string
+        repetitionInterchangeAcknowledmentsISA14:
+          type: string
+        defaultInterchangeUsageIndicatorISA15:
+          type: string
+        componentElementSeparator:
+          type: string
+        interchangeControlVersionNumberISA12:
+          type: string
+        interchangeControlStandardsIdentifierISA11:
+          type: string
+        responsibleAgencyCodeGS07:
+          type: string
+        releaseNumberGS08:
+          type: string
+        implementationConventionReferenceST03:
+          type: string
+      type: object
+    X12Config_allOf:
+      properties:
+        configType:
+          enum:
+          - READ
+          - WRITE
+          type: string
+      type: object
+    X12Document_allOf:
+      properties:
+        x12Version:
+          title: X12 Version
+          type: string
+        transactionSet:
+          type: string
+      type: object
+    authModeBasic_allOf:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      type: object
+    authModeClientCredentials_allOf:
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+      type: object
+    authModeAPIKey_allOf:
+      properties:
+        apiKey:
+          type: string
+        httpHeaderName:
+          type: string
+      type: object
+    authModeOAuth_allOf:
+      properties:
+        tokenUrl:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+      type: object
+    authModePKI_allOf:
+      properties:
+        identityFilePath:
+          type: string
+        passphrase:
+          type: string
+        algorithm:
+          type: string
+      type: object
+    EndpointConfig_vpc:
+      example:
+        enabled: true
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    sftpConfig_allOf:
+      properties:
+        serverAddress:
+          type: string
+        serverPort:
+          type: integer
+        authMode:
+          $ref: '#/components/schemas/authModeBasic'
+        fileAge:
+          type: number
+        pollingFrequency:
+          type: number
+        sizeCheckWaitTime:
+          type: integer
+      type: object
+    sftp_allOf:
+      properties:
+        config:
+          $ref: '#/components/schemas/sftpConfig'
+      type: object
+    httpConfig_allOf:
+      properties:
+        protocol:
+          default: HTTP
+          enum:
+          - HTTP
+          - HTTPS
+          type: string
+        serverAddress:
+          type: string
+        serverPort:
+          default: 80
+          type: integer
+        path:
+          type: string
+        allowedMethods:
+          default: POST
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+          - HEAD
+          - OPTIONS
+          type: string
+        persistentConnections:
+          default: false
+          type: boolean
+        connectionIdleTimeout:
+          default: 30000
+          type: integer
+        responseTimeout:
+          default: 15000
+          type: integer
+        authMode:
+          $ref: '#/components/schemas/authModeBaseConfig'
+        tlsContext:
+          $ref: '#/components/schemas/TLSContext'
+      type: object
+    http_allOf:
+      properties:
+        config:
+          $ref: '#/components/schemas/httpConfig'
+      type: object
+  securitySchemes:
+    oauth_2_0:
+      flows:
+        implicit:
+          authorizationUrl: https://anypoint.mulesoft.com/accounts/oauth2/authorize
+          scopes: {}
+      type: oauth2
