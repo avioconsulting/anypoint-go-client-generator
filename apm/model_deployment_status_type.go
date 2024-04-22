@@ -22,7 +22,6 @@ type DeploymentStatusType string
 const (
 	ACTIVE DeploymentStatusType = "ACTIVE"
 	INACTIVE DeploymentStatusType = "INACTIVE"
-	DRAFT DeploymentStatusType = "DRAFT"
 	FAIL DeploymentStatusType = "FAIL"
 )
 
