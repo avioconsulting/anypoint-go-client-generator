@@ -13,7 +13,7 @@ rm apm/model_deployment_status_type.go
 cp temp ../apm/model_deployment_status_type.go
 cp temp apm/model_deployment_status_type.go
 rm temp
-cd apm/
+mv apm/go.mod go.mod
 go mod tidy
 echo "Finished creating new go-client"
 

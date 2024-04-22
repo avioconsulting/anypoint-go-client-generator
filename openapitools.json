@@ -11,7 +11,7 @@
         "gitUserId": "avioconsulting",
         "gitRepoId": "anypoint-go-client-generator",
         "additionalProperties": {
-          "isGoSubmodule": true,
+          "isGoSubmodule": false,
           "packageName": "#{name}",
           "structPrefix": true,
           "packageVersion": "1.0.0"
