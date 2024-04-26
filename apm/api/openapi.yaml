@@ -5589,10 +5589,16 @@ components:
           type: boolean
         qualifiers:
           items:
-            type: object
+            $ref: '#/components/schemas/identifierTypeQualifier'
           type: array
         environment_id:
           type: string
+      required:
+      - description
+      - id
+      - label
+      - name
+      - qualifiers
       type: object
     identifierTypeQualifier_allOf:
       properties:

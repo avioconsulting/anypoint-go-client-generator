@@ -16,12 +16,12 @@ import (
 
 // IdentifierTypeAllOf struct for IdentifierTypeAllOf
 type IdentifierTypeAllOf struct {
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Label *string `json:"label,omitempty"`
-	Description *string `json:"description,omitempty"`
+	Id string `json:"id"`
+	Name string `json:"name"`
+	Label string `json:"label"`
+	Description string `json:"description"`
 	Readonly *bool `json:"readonly,omitempty"`
-	Qualifiers *[]map[string]interface{} `json:"qualifiers,omitempty"`
+	Qualifiers []IdentifierTypeQualifier `json:"qualifiers"`
 	EnvironmentId *string `json:"environment_id,omitempty"`
 }
 
@@ -29,8 +29,13 @@ type IdentifierTypeAllOf struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIdentifierTypeAllOf() *IdentifierTypeAllOf {
+func NewIdentifierTypeAllOf(id string, name string, label string, description string, qualifiers []IdentifierTypeQualifier) *IdentifierTypeAllOf {
 	this := IdentifierTypeAllOf{}
+	this.Id = id
+	this.Name = name
+	this.Label = label
+	this.Description = description
+	this.Qualifiers = qualifiers
 	return &this
 }
 
@@ -42,132 +47,100 @@ func NewIdentifierTypeAllOfWithDefaults() *IdentifierTypeAllOf {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *IdentifierTypeAllOf) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *IdentifierTypeAllOf) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *IdentifierTypeAllOf) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *IdentifierTypeAllOf) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *IdentifierTypeAllOf) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *IdentifierTypeAllOf) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *IdentifierTypeAllOf) HasName() bool {
-	if o != nil && o.Name != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *IdentifierTypeAllOf) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *IdentifierTypeAllOf) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *IdentifierTypeAllOf) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *IdentifierTypeAllOf) HasLabel() bool {
-	if o != nil && o.Label != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *IdentifierTypeAllOf) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *IdentifierTypeAllOf) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *IdentifierTypeAllOf) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *IdentifierTypeAllOf) HasDescription() bool {
-	if o != nil && o.Description != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *IdentifierTypeAllOf) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
 // GetReadonly returns the Readonly field value if set, zero value otherwise.
@@ -202,36 +175,28 @@ func (o *IdentifierTypeAllOf) SetReadonly(v bool) {
 	o.Readonly = &v
 }
 
-// GetQualifiers returns the Qualifiers field value if set, zero value otherwise.
-func (o *IdentifierTypeAllOf) GetQualifiers() []map[string]interface{} {
-	if o == nil || o.Qualifiers == nil {
-		var ret []map[string]interface{}
+// GetQualifiers returns the Qualifiers field value
+func (o *IdentifierTypeAllOf) GetQualifiers() []IdentifierTypeQualifier {
+	if o == nil {
+		var ret []IdentifierTypeQualifier
 		return ret
 	}
-	return *o.Qualifiers
+
+	return o.Qualifiers
 }
 
-// GetQualifiersOk returns a tuple with the Qualifiers field value if set, nil otherwise
+// GetQualifiersOk returns a tuple with the Qualifiers field value
 // and a boolean to check if the value has been set.
-func (o *IdentifierTypeAllOf) GetQualifiersOk() (*[]map[string]interface{}, bool) {
-	if o == nil || o.Qualifiers == nil {
+func (o *IdentifierTypeAllOf) GetQualifiersOk() (*[]IdentifierTypeQualifier, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Qualifiers, true
+	return &o.Qualifiers, true
 }
 
-// HasQualifiers returns a boolean if a field has been set.
-func (o *IdentifierTypeAllOf) HasQualifiers() bool {
-	if o != nil && o.Qualifiers != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetQualifiers gets a reference to the given []map[string]interface{} and assigns it to the Qualifiers field.
-func (o *IdentifierTypeAllOf) SetQualifiers(v []map[string]interface{}) {
-	o.Qualifiers = &v
+// SetQualifiers sets field value
+func (o *IdentifierTypeAllOf) SetQualifiers(v []IdentifierTypeQualifier) {
+	o.Qualifiers = v
 }
 
 // GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
@@ -268,22 +233,22 @@ func (o *IdentifierTypeAllOf) SetEnvironmentId(v string) {
 
 func (o IdentifierTypeAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if true {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Label != nil {
+	if true {
 		toSerialize["label"] = o.Label
 	}
-	if o.Description != nil {
+	if true {
 		toSerialize["description"] = o.Description
 	}
 	if o.Readonly != nil {
 		toSerialize["readonly"] = o.Readonly
 	}
-	if o.Qualifiers != nil {
+	if true {
 		toSerialize["qualifiers"] = o.Qualifiers
 	}
 	if o.EnvironmentId != nil {
