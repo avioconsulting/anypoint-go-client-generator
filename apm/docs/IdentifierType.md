@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Label** | Pointer to **string** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
+**Name** | **string** |  | 
+**Label** | **string** |  | 
+**Description** | **string** |  | 
 **Readonly** | Pointer to **bool** |  | [optional] 
-**Qualifiers** | Pointer to **[]map[string]interface{}** |  | [optional] 
+**Qualifiers** | [**[]IdentifierTypeQualifier**](IdentifierTypeQualifier.md) |  | 
 **EnvironmentId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewIdentifierType
 
-`func NewIdentifierType() *IdentifierType`
+`func NewIdentifierType(id string, name string, label string, description string, qualifiers []IdentifierTypeQualifier, ) *IdentifierType`
 
 NewIdentifierType instantiates a new IdentifierType object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *IdentifierType) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *IdentifierType) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -100,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
-### HasLabel
-
-`func (o *IdentifierType) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -125,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *IdentifierType) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetReadonly
 
@@ -158,28 +138,23 @@ HasReadonly returns a boolean if a field has been set.
 
 ### GetQualifiers
 
-`func (o *IdentifierType) GetQualifiers() []map[string]interface{}`
+`func (o *IdentifierType) GetQualifiers() []IdentifierTypeQualifier`
 
 GetQualifiers returns the Qualifiers field if non-nil, zero value otherwise.
 
 ### GetQualifiersOk
 
-`func (o *IdentifierType) GetQualifiersOk() (*[]map[string]interface{}, bool)`
+`func (o *IdentifierType) GetQualifiersOk() (*[]IdentifierTypeQualifier, bool)`
 
 GetQualifiersOk returns a tuple with the Qualifiers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQualifiers
 
-`func (o *IdentifierType) SetQualifiers(v []map[string]interface{})`
+`func (o *IdentifierType) SetQualifiers(v []IdentifierTypeQualifier)`
 
 SetQualifiers sets Qualifiers field to given value.
 
-### HasQualifiers
-
-`func (o *IdentifierType) HasQualifiers() bool`
-
-HasQualifiers returns a boolean if a field has been set.
 
 ### GetEnvironmentId
 

@@ -2767,9 +2767,15 @@ components:
             qualifiers:
               type: array
               items:
-                type: object
+                $ref: '#/components/schemas/identifierTypeQualifier'
             environment_id:
               type: string
+          required:
+            - id
+            - name 
+            - label
+            - description
+            - qualifiers
           type: object
     identifierTypeQualifier:
       title: IdentifierTypeQualifier
